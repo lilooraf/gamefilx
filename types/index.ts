@@ -64,3 +64,8 @@ export type Images = {
         sm: string
     }[]
 }
+
+export type NavItem = {
+    title: string
+    target: string
+}
