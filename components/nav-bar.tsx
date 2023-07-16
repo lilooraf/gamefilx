@@ -1,9 +1,9 @@
 'use client';
-import { Icons } from './icons';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { cn } from '../lib/utils';
-import { NavItem } from '../types';
+import { Icons } from '@/components/icons';
+import { cn } from '@/lib/utils';
+import { NavItem } from '@/types';
 
 interface NavProps {
   items: NavItem[];
