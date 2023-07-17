@@ -25,3 +25,21 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.blurry-background {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px); /* For Safari support */
+}
+
+details > summary {
+  list-style: none;
+}
+
+details summary::-webkit-details-marker {
+  display:none;
+}
