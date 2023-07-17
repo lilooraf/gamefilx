@@ -6,14 +6,13 @@ interface GameTrailersProps {
 }
 
 const GameTrailers = ({ game }: GameTrailersProps) => {
-  if (game?.trailers) {
+  if (game?.trailers[0]?.videoId) {
     return (
       <details className='group flex'>
-        <summary className='flex flex-col justify-center items-center align-middle text-center cursor-pointer'>
-          <p className='font-bold'>Trailers</p>
-          <Icons.chevronDown className='w-4 group-open:rotate-180 transition-transform duration-200' />
+        <summary className='flex justify-center items-center align-middle text-center cursor-pointer'>
+          <Icons.chevronDown className='h-8 group-open:rotate-180 transition-transform duration-200' />
         </summary>
-        <div className='flex space-x-2 group overflow-x-scroll scroll-smooth'>
+        <div className='flex space-x-2 pb-2 group overflow-x-scroll overflow-y-auto scroll-smooth'>
           {game?.trailers.map((trailer: Trailer) => (
             <div key={trailer.videoId} className='flex flex-col space-y-2'>
               <p className='text-sm font-bold line-clamp-2'>
