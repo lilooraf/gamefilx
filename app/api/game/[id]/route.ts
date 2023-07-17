@@ -9,5 +9,5 @@ export async function GET(request: Request, { params }: { params: { id: string }
     });
     const product = await res.json()
 
-    return NextResponse.json({ product })
+    return NextResponse.json(product)
 }

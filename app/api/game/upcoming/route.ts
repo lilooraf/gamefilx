@@ -17,5 +17,5 @@ export async function GET(request: Request) {
     });
     const product = await res.json()
 
-    return NextResponse.json({ product })
+    return NextResponse.json(product)
 }

@@ -6,9 +6,6 @@ export async function GET(request: Request) {
     const skip = searchParams.get('skip')
     const sort = searchParams.get('sort')
 
-    console.log('platforms', platforms)
-    console.log('skip', skip)
-
     const res = await fetch(`${process.env.API_URL}/game?sort=${sort || 'score'}&platforms=${platforms}&skip=${skip || 0}`, {
         headers: {
             'X-RapidAPI-Key': process.env.API_KEY as string,
@@ -17,5 +14,5 @@ export async function GET(request: Request) {
     });
     const product = await res.json()
 
-    return NextResponse.json({ product })
+    return NextResponse.json(product)
 }
