@@ -9,7 +9,7 @@ interface GameImagesProps {
 
 export const GameImages = ({ game, isLoading }: GameImagesProps) => {
   if (isLoading) {
-    <GameImagesSkeleton />
+    return <GameImagesSkeleton />
   }
   return (
     <div className='flex space-x-2 group overflow-x-scroll scroll-smooth'>
