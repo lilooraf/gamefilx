@@ -17,7 +17,7 @@ export const GameImages = ({ game, isLoading }: GameImagesProps) => {
         <Image
           key={screenshot.og}
           alt='screenshot'
-          className='rounded-sm self-center w-64 md:w-96 aspect-video'
+          className='rounded-sm self-center w-64 md:w-96 aspect-video bg-gray-200/20'
           src={`https://img.opencritic.com/${screenshot.og}`}
           width={800}
           height={800}
