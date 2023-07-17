@@ -1,6 +1,9 @@
 export type Game = {
     id: number
     name: string
+}
+
+export type GameDetail = Game & {
     description: string
     firstReleaseDate: string
     Genres: Genre[]
@@ -8,6 +11,20 @@ export type Game = {
     Companies: Company[]
     trailers: Trailer[]
     images: Images
+}
+
+export type GameInfo = Game & {
+    topCriticScore: number
+    images: {
+        box?: {
+            og: string
+            sm: string
+        },
+        banner?: {
+            og: string
+            sm: string
+        },
+    }
 }
 
 export type Genre = {
@@ -59,13 +76,28 @@ export type Images = {
     logo: {
         og: string
     },
-    screenshots: {
+    screenshots: [{
         og: string
         sm: string
-    }[]
+    }]
 }
+
+export type ImageType = 'box' | 'square' | 'masthead' | 'banner' | 'logo' | 'screenshots'
 
 export type NavItem = {
     title: string
     target: string
 }
+
+export type GameListType = {
+    RequestType: 'hall-of-fame' | 'popular' | 'upcoming' | 'platforms'
+    title: string
+} & (
+        | {
+            RequestType: 'hall-of-fame' | 'popular' | 'upcoming'
+        }
+        | {
+            RequestType: 'platforms'
+            platforms: string
+        }
+    );
