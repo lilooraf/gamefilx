@@ -28,7 +28,7 @@ export default function GamesPage() {
         gameList={{
           title: 'PC',
           RequestType: 'platforms',
-          platforms: 'pc',
+          platforms: ['pc'],
         }}
         id={4}
       />
