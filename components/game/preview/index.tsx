@@ -52,10 +52,12 @@ const GamePreview = ({ game }: GameProps) => {
               {game.name}
             </h4>
           </div>
-          <div className='flex absolute bottom-0 right-0 m-2 gap-1'>
-            <Icons.star className='w-4 text-indigo-600' />
-            {game.topCriticScore.toPrecision(2)}%
-          </div>
+          {game.topCriticScore > 0 && (
+            <div className='flex absolute bottom-0 right-0 m-2 gap-1'>
+              <Icons.star className='w-4' />
+              {game.topCriticScore.toPrecision(2)}%
+            </div>
+          )}
         </div>
       </li>
       <Modal isOpen={isOpen} color={data} onClose={() => setIsOpen(false)}>

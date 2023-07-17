@@ -55,7 +55,7 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
             day: 'numeric',
           })}
         </p>
-        <div className='hidden sm:block lg:hidden'>
+        <div className='lg:hidden flex justify-around'>
           <GameActions game={game} />
         </div>
       </div>
@@ -64,7 +64,7 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
         <p className='text-sm'>{game?.description}</p>
       </div>
 
-      <div className='sm:hidden lg:block'>
+      <div className='hidden lg:flex lg:flex-col justify-around xl:flex-row'>
         <GameActions game={game} />
       </div>
     </div>

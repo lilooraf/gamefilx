@@ -98,6 +98,8 @@ export type GameListType = {
         }
         | {
             RequestType: 'platforms'
-            platforms: string
+            platforms: PlatformType[]
         }
     );
+
+export type PlatformType = 'all' | 'ps4' | 'xb1' | 'pc' | 'wii-u' | 'vita' | 'switch' | 'oculus' | 'vive' | 'psvr' | '3ds' | 'xbsx' | 'ps5' | 'stadia'

@@ -32,7 +32,7 @@ const GameDetails = ({ game }: GameDetailsProps) => {
       </div>
       <div className='flex gap-4 flex-col xl:flex-row lg:h-full xl:h-[28rem]'>
         <div className='flex flex-col'>
-          <div className='relative flex justify-center items-center w-64 sm:w-80 md:w-[24rem] lg:w-[50rem]'>
+          <div className='relative aspect-video h-full flex justify-center items-center w-64 sm:w-80 md:w-[24rem] lg:w-[50rem]'>
             <GameImageBanner
               game={gameData}
               isLoading={isLoading}

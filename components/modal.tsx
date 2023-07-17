@@ -30,7 +30,7 @@ export const Modal = ({ children, isOpen, onClose, color }: ModalProps) => {
               style={{
                 backgroundColor: `rgba(${color}, 0.3)`,
               }}
-              className='flex h-full w-full p-8 rounded-md overflow-y-auto max-h-[85vh]'
+              className='flex h-full w-full p-8 rounded-md overscroll-contain overflow-y-auto max-h-[85vh]'
             >
               {children}
             </div>
