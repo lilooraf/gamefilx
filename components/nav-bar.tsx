@@ -33,17 +33,6 @@ export default function NavBar({ items }: NavProps) {
           </li>
         ))}
       </ul>
-
-      <div className='flex gap-2'>
-        <input
-          type='text'
-          placeholder='Search'
-          className='border border-gray-300 rounded-md p-1'
-        />
-        <button className='border border-gray-300 rounded-md p-1'>
-          Search
-        </button>
-      </div>
     </nav>
   );
 }
