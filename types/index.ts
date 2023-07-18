@@ -1,6 +1,7 @@
 export type Game = {
     id: number
     name: string
+    topCriticScore: number
 }
 
 export type GameDetail = Game & {
@@ -14,7 +15,6 @@ export type GameDetail = Game & {
 }
 
 export type GameInfo = Game & {
-    topCriticScore: number
     images: {
         box?: {
             og: string
