@@ -7,6 +7,7 @@ import {
   Plus,
   LucideIcon,
   ChevronDown,
+  LogOut,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -19,4 +20,5 @@ export const Icons = {
   app: Gamepad2,
   close: X,
   plus: Plus,
+  logout: LogOut,
 };
