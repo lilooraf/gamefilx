@@ -1,29 +1,17 @@
-import { db } from '@/lib/db';
-import { getCurrentUser } from '@/lib/session';
+import { UserLibrary } from '@/components/game/library';
+import { Metadata } from 'next';
 
-export default async function GamesPage() {
+export const dynamic = "force-dynamic"
 
-  const user = await getCurrentUser();
+export const metadata: Metadata = {
+  title: "My Library",
+  description: "Your game library",
+}
 
-  if (user) {
-    const games = await db.userGame.findMany({
-      where: {
-        userId: user.id
-      }
-    });
-
-    return (
-      <>
-        {games.map((game) => (
-          <div key={game.id}>
-            {game.id}
-          </div>
-        ))}
-      </>
-    )
-  }
-
+export default function GamesPage() {
   return (
-      <></>
+    <>
+      <UserLibrary />
+    </>
   );
 }
