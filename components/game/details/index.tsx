@@ -26,7 +26,7 @@ const GameDetails = ({ game }: GameDetailsProps) => {
   }, []);
 
   return (
-    <div className='flex flex-col space-y-2 gap-2 font-mono w-64 sm:w-80 md:w-96 lg:w-[50rem] xl:w-[70rem]'>
+    <div className='flex flex-col space-y-2 gap-2  w-64 sm:w-80 md:w-96 lg:w-[50rem] xl:w-[70rem]'>
       <div className='max-w-[32rem]'>
         <p className='mb-2 font-medium text-xl line-clamp-2'>{game.name}</p>
       </div>
