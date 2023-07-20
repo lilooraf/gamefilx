@@ -65,7 +65,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Learn More
 
-To learn more about [GameFlix](https://www.youtube.com/watch?v=gkTb9GP9lVI), take a look at the following resources:
+To learn more about [GameFlix](https://youtu.be/gkTb9GP9lVI?t=25), take a look at the following resources:
 
 - [Documentation](https://www.youtube.com/watch?v=dQw4w9WgXcQ) - learn about our API.
 
