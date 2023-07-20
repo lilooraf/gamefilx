@@ -70,3 +70,17 @@ To learn more about [GameFlix](https://youtu.be/gkTb9GP9lVI?t=25), take a look a
 - [Documentation](https://www.youtube.com/watch?v=dQw4w9WgXcQ) - learn about our API.
 
 You can check out [the GitHub repository](https://github.com/lilooraf/gamefilx) - your feedback and contributions are welcome!
+
+## What did we use?
+
+- [Next.js](https://nextjs.org/)
+- [NextAuth.js](https://next-auth.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [LegendApp State](https://legendapp.com/open-source/state/)
+- [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Color Thief React](https://www.npmjs.com/package/color-thief-react)
+- [Docker](https://www.docker.com/)
+- [Prisma](https://www.prisma.io/)
+- [PostgreSQL](https://www.postgresql.org/)
