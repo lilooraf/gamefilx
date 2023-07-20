@@ -1,8 +1,8 @@
 import { Status } from "@prisma/client"
 import * as z from "zod"
 
-export const userGamesSchema = z.object({
-  score: z.number().optional(),
+export const userGamePostSchema = z.object({
+  rating: z.number().optional(),
   review: z.string().optional(),
   status: z.nativeEnum(Status).optional(),
   game: z.object({
@@ -20,4 +20,8 @@ export const userGamesSchema = z.object({
       }).nullable(),
     }),
   }),
+})
+
+export const userGameDeleteSchema = z.object({
+  gameId: z.number(),
 })

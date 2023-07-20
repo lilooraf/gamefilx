@@ -1,15 +1,16 @@
 import React from 'react';
 import useOutsideCloser from '@/hooks/use-outside-closer';
 import { Icons } from '@/components/icons';
+import { cn } from '@/lib/utils';
 
-interface ModalProps {
+interface ModalProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  color?: [number, number, number];
+  customColor?: [number, number, number];
 }
 
-export const Modal = ({ children, isOpen, onClose, color }: ModalProps) => {
+export const Modal = ({ children, isOpen, onClose, customColor, className }: ModalProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   useOutsideCloser(ref, () => {
@@ -28,9 +29,11 @@ export const Modal = ({ children, isOpen, onClose, color }: ModalProps) => {
           >
             <div
               style={{
-                backgroundColor: `rgba(${color}, 0.3)`,
+                ...(customColor && {
+                  backgroundColor: `rgba(${customColor}, 0.3)`,
+                }),
               }}
-              className='flex h-full w-full p-8 rounded-md overscroll-contain overflow-y-auto max-h-[85vh]'
+              className={cn('flex h-full w-full p-8 rounded-md overscroll-contain overflow-y-auto max-h-[85vh]', className)}
             >
               {children}
             </div>

@@ -7,7 +7,7 @@ export const appNav: NavItem[] = [
     },
     {
         title: "My Library",
-        target: "/games/mylibrary",
+        target: "/games/my-library",
     },
     {
         title: "Lists",
