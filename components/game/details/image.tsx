@@ -31,23 +31,28 @@ export const GameImageBanner = ({
           width={700}
           height={700}
         />
-        {topCriticScore > 0 && (
-          <div className='flex absolute bottom-0 right-0 m-1 bg-black/50 p-1 rounded-md space-x-1'>
-            <Icons.star className='w-4' />
-            <p>{topCriticScore.toPrecision(2)}%</p>
-          </div>
-        )}
+        {topCriticScore > 0 && <GameScore topCriticScore={topCriticScore} />}
       </>
     );
   } else if (topCriticScore > 0) {
     return (
       <>
         <div className='h-full w-full bg-gray-200/20 rounded-sm'></div>
-        <div className='flex absolute bottom-0 right-0 m-1 bg-black/50 p-1 rounded-md space-x-1'>
-          <Icons.star className='w-4' />
-          <p>{topCriticScore.toPrecision(2)}%</p>
-        </div>
+        <GameScore topCriticScore={topCriticScore} />
       </>
     );
   }
+};
+
+interface GameScoreProps {
+  topCriticScore: number;
+}
+
+const GameScore = ({ topCriticScore }: GameScoreProps) => {
+  return (
+    <div className='flex absolute bottom-0 right-0 m-1 bg-black/50 p-1 rounded-md space-x-1 font-mono'>
+      <Icons.star className='w-4' />
+      <p>{topCriticScore.toPrecision(2)}%</p>
+    </div>
+  );
 };
