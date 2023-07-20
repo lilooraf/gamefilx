@@ -15,7 +15,7 @@ export type GameDetail = Game & {
 }
 
 export type GameInfo = Game & {
-    images: {
+    images?: {
         box?: {
             og: string
             sm: string
