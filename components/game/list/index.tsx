@@ -36,7 +36,7 @@ export const GameList = ({ games, id }: GameListProps) => {
         <Icons.chevronLeft className='h-full w-10 hover:scale-125 transition-transform ' />
       </div>
       <ul className='flex gap-3 p-5'>
-        {games.map((game: GameInfo) => (
+        {games?.map((game: GameInfo) => (
           <GamePreview key={game.id} game={game} />
         ))}
       </ul>
