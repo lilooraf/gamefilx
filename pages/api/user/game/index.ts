@@ -6,7 +6,7 @@ import { withAuthentication } from "@/lib/api-middlewares/with-authentication"
 import { withMethods } from "@/lib/api-middlewares/with-methods"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { userGamesSchema } from "@/lib/validations/user-games"
+import { userGameDeleteSchema, userGamePostSchema } from "@/lib/validations/user-game"
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -22,8 +22,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     if (req.method === "POST") {
       if (body) {
-
-        const payload = userGamesSchema.parse(body)
+        const payload = userGamePostSchema.parse(body)
 
         if (payload) {
           await db.userGame.upsert({
@@ -32,7 +31,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             },
             update: {
               review: payload.review,
-              score: payload.score,
+              rating: payload.rating,
               status: payload.status,
               game: {
                 update: {
@@ -45,7 +44,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             create: {
               id: `${user.id}-${payload.game.id}`,
               review: payload.review,
-              score: payload.score,
+              rating: payload.rating,
               status: payload.status,
               user: {
                 connect: {
@@ -53,32 +52,53 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
                 },
               },
               game: {
-                connect: {
-                  id: payload.game.id,
-                },
-                create: {
-                  name: payload.game.name,
-                  images: payload.game.images as any,
-                  id: payload.game.id,
-                  topCriticScore: payload.game.topCriticScore,
+                connectOrCreate: {
+                  where: {
+                    id: payload.game.id,
+                  },
+                  create: {
+                    name: payload.game.name,
+                    images: payload.game.images as any,
+                    id: payload.game.id,
+                    topCriticScore: payload.game.topCriticScore,
+                  },
                 },
               },
             }
+          }).then(() => {
+            res.status(200).end()
           })
         }
       }
       return res.end()
     } else if (req.method === "GET") {
-      const userGames = await db.userGame.findMany({
+      const games = await db.userGame.findMany({
         where: {
           userId: user.id,
         },
         include: {
           game: true,
         },
+      }).then((user) => {
+        // return array of games
+        return user.map((userGame) => {
+          return userGame.game
+        })
       })
 
-      return res.send({userGames})
+      return res.send(games)
+    } else if (req.method === "DELETE") {
+      const payload = userGameDeleteSchema.parse(body)
+
+      await db.userGame.delete({
+        where: {
+          id: `${user.id}-${payload.gameId}`,
+        },
+      }).then(() => {
+        console.log("deleted")
+        res.status(200).end()
+      })
+      return res.end()
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -88,4 +108,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default withMethods(["GET", "POST"], withAuthentication(handler))
+export default withMethods(["GET", "POST", "DELETE"], withAuthentication(handler))
