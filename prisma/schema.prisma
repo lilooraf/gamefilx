@@ -29,9 +29,9 @@ enum Status {
 
 model UserGame {
   id     String  @id @unique
-  score  Int?
+  rating Int?
   review String?
-  status Status? @default(WISH_LIST)
+  status Status  @default(WISH_LIST)
   gameId Int
   userId String
   user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -65,14 +65,29 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Platform {
+  name          String         @id @unique
+  longName      String
+  platformUsers UserPlatform[]
+}
+
+model UserPlatform {
+  id         String   @id @default(cuid())
+  userId     String
+  platformId String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  platform   Platform @relation(fields: [platformId], references: [name], onDelete: Cascade)
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  userPlatforms UserPlatform[]
 
   userGames UserGame[]
 }
