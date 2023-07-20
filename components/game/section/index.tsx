@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { GameListSkeleton, GameList } from './list';
+import { GameListSkeleton, GameList } from '../list';
 import { GameInfo, GameListType } from '@/types';
 
 interface GamesProps {
@@ -18,6 +18,13 @@ const getGameList = async (gameList: GameListType) => {
     }`
   );
   const data = await res.json();
+  // In case the quota is exceeded
+  if (
+    data.message ==
+    'You have exceeded the DAILY quota for Requests on your current plan, ULTRA. Upgrade your plan at https://rapidapi.com/opencritic-opencritic-default/api/opencritic-api'
+  ) {
+    return null;
+  }
   return data;
 };
 
@@ -30,28 +37,30 @@ export function GamesSection({ gameList, id }: GamesProps) {
     getGameList(gameList).then((res) => {
       setData(res);
       setLoading(false);
-    })
+    });
   }, []);
 
   if (isLoading) {
     return (
       <div className='flex flex-col p-2'>
-        <h4 className='pl-6 font-mono text-lg font-bold'>{gameList.title}</h4>
+        <h4 className='pl-6  text-lg font-bold'>{gameList.title}</h4>
         <GameListSkeleton delay={id} />
       </div>
     );
   }
 
   if (!data) {
-    return <div>No book found 🥲</div>;
+    return;
   }
 
   return (
     <div className='flex flex-col p-2'>
-      <h4 className='pl-6 font-mono text-lg font-bold'>{gameList.title}</h4>
+      <h4 className='pl-6  text-lg font-bold'>{gameList.title}</h4>
       <div className='relative'>
         <GameList games={data} id={id} />
       </div>
     </div>
   );
 }
+
+export { GamesSectionSekeleton } from './skeleton';
