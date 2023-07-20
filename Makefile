@@ -12,37 +12,37 @@ export DIR
 ##------------------------------DEVELOPEMENT---------------------------------------------------------------
 ## 
 
-##make app-[MODE]-log               This commande will run the app with logs.
+##make app-fast-[MODE]-log          Run the app with logs.
 ## 
-app-$(NODE_ENV)-log:
+app-fast-$(NODE_ENV)-log:
 	@echo -e "\n\t 🎧 🤖 \n\t💻 🔧 💉\n\t🚀 🛸 🛰\n"
 	@docker-compose -f docker-compose.$(NODE_ENV).yml -p $(DIR) up
 
-##make app-[MODE]                   This commande will run the app in background without logs.
+##make app-fast-[MODE]              Run the app in background without logs.
 ## 
-app-$(NODE_ENV):
+app-fast-$(NODE_ENV):
 	@echo -e "\n\t 🎧 🤖 \n\t💻 🔧 💉\n\t🚀 🛸 🛰\n"
 	@docker-compose -f docker-compose.$(NODE_ENV).yml -p $(DIR) up -d
 
-##make app-[MODE]-log-rebuild	  This commande will rebuild containers and run the app with logs.
+##make app-[MODE]-log	          Build containers and run the app with logs.
 ## 
-app-$(NODE_ENV)-log-rebuild:
+app-$(NODE_ENV)-log:
 	@echo -e "\n\t 🎧 🤖 \n\t💻 🔧 💉\n\t🚀 🛸 🛰\n"
 	@docker-compose -f docker-compose.$(NODE_ENV).yml -p $(DIR) up --build
 
-##make app-[MODE]-rebuild           This commande will rebuild containers and run the app in background without logs.
+##make app-[MODE]                   Build containers and run the app in background without logs.
 ## 
-app-$(NODE_ENV)-rebuild:
+app-$(NODE_ENV):
 	@echo -e "\n\t 🎧 🤖 \n\t💻 🔧 💉\n\t🚀 🛸 🛰\n"
 	@docker-compose -f docker-compose.$(NODE_ENV).yml -p $(DIR) up --build -d
 
-##make app-[MODE]-down              This commande will delete containers.
+##make app-[MODE]-down              Delete containers.
 ## 
 app-$(NODE_ENV)-down:
 	@echo -e "\n\t 🚨 🚧 ⭕️ 🛑 ⛔️\n\n"
 	@docker-compose -f docker-compose.$(NODE_ENV).yml -p $(DIR) down --remove-orphans
 
-##make app-[MODE]-down-clean        This commande will delete containers and volumes.
+##make app-[MODE]-down-clean        Delete containers and volumes.
 ## 
 app-$(NODE_ENV)-down-clean:
 	@echo -e "\n\t 🚨 🚧 ⭕️ 🛑 ⛔️\n\n"
