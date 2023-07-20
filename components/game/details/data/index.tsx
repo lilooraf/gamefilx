@@ -8,15 +8,15 @@ interface GameDataProps {
 }
 
 export const GameData = ({ game, isLoading }: GameDataProps) => {
-
-  if (isLoading || !game) return <GameDataSkeleton />
+  if (isLoading || !game) return <GameDataSkeleton />;
 
   return (
     <div className='flex flex-col w-full justify-between lg:flex-row xl:flex-col space-y-2 lg:space-x-2 lg:space-y-0 xl:space-x-0 xl:space-y-2'>
-      <div className='space-y-2 font-mono min-w-fit'>
+      <div className='space-y-2  min-w-fit'>
         <p className='text-sm font-bold line-clamp-2 '>
-          By {game?.Companies.map((company) => (
-            <span key={company.name} >
+          By{' '}
+          {game?.Companies.map((company) => (
+            <span key={company.name}>
               {company.name} <br />
             </span>
           ))}
