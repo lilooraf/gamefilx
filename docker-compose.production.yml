@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+    database:
+        container_name: gameflix_db
+        image: 'postgres'
+        expose:
+            - '${POSTGRES_PORT}'
+        environment:
+            LC_ALL: C.UTF-8
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+        env_file:
+            - .env
+        command: -p ${POSTGRES_PORT}
+        networks:
+            - gameflix_network
+        restart: "on-failure"
+    server:
+        container_name: nextjs_server
+        depends_on:
+            - database
+        build: .
+        environment:
+            SERVER_PORT: ${SERVER_PORT}
+            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@gameflix_db:${POSTGRES_PORT}/${POSTGRES_DB}?schema=public
+        command: bash -c "sleep 5;yarn prisma migrate deploy; yarn prisma db seed; yarn start -p $SERVER_PORT"
+        ports:
+            - '${SERVER_PORT}:${SERVER_PORT}'
+        networks:
+            - gameflix_network
+        restart: "on-failure"
+
+networks:
+    gameflix_network:
+        driver: bridge
