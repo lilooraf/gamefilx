@@ -15,18 +15,22 @@ const GamePreview = ({ game }: GameProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, loading, error } = useColor(
     'https://img.opencritic.com/' +
-      (game.images.box?.og || game.images.banner?.og),
+      (game.images?.box?.og || game.images?.banner?.og),
     'rgbArray',
     {
       crossOrigin: 'img.opencritic.com',
     }
-  );
+  )
 
   if (loading) {
     return <GamePreviewSkeleton delay={0} />;
   }
 
-  const imageType: ImageType = game.images.box ? 'box' : 'banner';
+  let imageType: ImageType = 'box';
+
+  if (game.images) {
+    imageType = game.images.box ? 'box' : 'banner';
+  }
 
   return (
     <>
@@ -35,7 +39,7 @@ const GamePreview = ({ game }: GameProps) => {
         style={{
           backgroundColor: `rgba(${data}, 0.3)`,
         }}
-        className='flex relative w-72 h-40 rounded-md p-2 cursor-pointer hover:scale-105 hover:z-10 dark:bg-gray-950 bg-white transition duration-150 ease-in-out font-mono'
+        className='flex relative w-72 h-40 rounded-md p-2 cursor-pointer hover:scale-105 hover:z-10 dark:bg-gray-950 bg-white transition duration-150 ease-in-out '
       >
         <div
           className={`flex gap-2 ${
@@ -53,14 +57,14 @@ const GamePreview = ({ game }: GameProps) => {
             </h4>
           </div>
           {game.topCriticScore > 0 && (
-            <div className='flex absolute bottom-0 right-0 m-2 gap-1'>
+            <div className='flex absolute bottom-0 right-0 m-2 gap-1 font-mono'>
               <Icons.star className='w-4' />
               {game.topCriticScore.toPrecision(2)}%
             </div>
           )}
         </div>
       </li>
-      <Modal isOpen={isOpen} color={data} onClose={() => setIsOpen(false)}>
+      <Modal isOpen={isOpen} customColor={data} onClose={() => setIsOpen(false)}>
         <GameDetails game={game} />
       </Modal>
     </>
