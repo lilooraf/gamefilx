@@ -3,18 +3,10 @@ import { NavItem } from "@/types";
 export const appNav: NavItem[] = [
     {
         title: "Home",
-        target: "/games",
+        target: "/app",
     },
     {
         title: "My Library",
-        target: "/games/my-library",
-    },
-    {
-        title: "Lists",
-        target: "/games/lists",
-    },
-    {
-        title: "Grenres",
-        target: "/games/genres",
+        target: "/app/my-library",
     },
 ];
