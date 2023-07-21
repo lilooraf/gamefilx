@@ -1,5 +1,6 @@
 'use client';
 
+import { GameInfo } from '@/types';
 import { observable, Observable } from '@legendapp/state';
 import { Status } from '@prisma/client';
 import { createContext, useContext } from 'react';
@@ -9,6 +10,7 @@ export const UserContext = createContext<{
   name: Observable<string | null>;
   email: Observable<string | null>;
   image: Observable<string | null>;
+  library_filter: Observable<Status>;
   platforms: Observable<
     | {
         name: string;
@@ -17,10 +19,11 @@ export const UserContext = createContext<{
     | undefined
   >;
   games: Observable<{
-    id: Observable<number>;
-    rating: Observable<number | null>;
-    review: Observable<string | null>;
-    status: Observable<Status>;
+    id: number;
+    rating: number | null;
+    review: string | null;
+    status: Status;
+    game: GameInfo;
   }[]>;
 } | null>(null);
 
@@ -43,6 +46,7 @@ interface UserProviderProps {
       rating: number | null;
       review: string | null;
       status: Status;
+      game: GameInfo;
     }[];
   };
   children: React.ReactNode;
@@ -58,6 +62,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({
       name: observable(initialUser.name),
       email: observable(initialUser.email),
       image: observable(initialUser.image),
+      library_filter: observable('WISH_LIST'),
       platforms: observable(
         initialUser.platforms?.map((platform) => ({
           name: platform.name,
@@ -65,10 +70,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({
         }))
       ),
       games: observable(initialUser.games.map((game) => ({
-        id: observable(game.id),
-        rating: observable(game.rating),
-        review: observable(game.review),
-        status: observable(game.status),
+        id: game.id,
+        rating: game.rating,
+        review: game.review,
+        status: game.status,
+        game: game.game,
       }))),
     }}
   >
