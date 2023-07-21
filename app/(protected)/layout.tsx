@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import NavBar from '@/components/nav-bar';
-import { appNav } from '@/config/app-nav';
 import { getCurrentUser } from '@/lib/session';
 import { db } from '@/lib/db';
 import { User } from 'next-auth';
 import { UserProvider } from '@/hooks/use-user';
+import { GameInfo } from '@/types';
 
 export const metadata: Metadata = {
   title: 'GameFlix',
@@ -56,6 +55,7 @@ const getUserGames = (
             review: true,
             status: true,
             rating: true,
+            game: true,
           },
         },
       },
@@ -68,6 +68,7 @@ const getUserGames = (
             review: userGame.review,
             status: userGame.status,
             rating: userGame.rating,
+            game: userGame.game,
           };
         }) || [];
       return userGames;
@@ -100,10 +101,10 @@ export default async function RootLayout({
             rating: game?.rating,
             review: game?.review,
             status: game.status,
+            game: game.game as GameInfo
           })),
         }}
       >
-        <NavBar items={appNav} />
         {children}
       </UserProvider>
     </>
