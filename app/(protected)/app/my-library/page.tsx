@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function GamesPage() {
   return (
-    <>
+    <div className='px-4'>
       <UserLibrary />
-    </>
+    </div>
   );
 }
