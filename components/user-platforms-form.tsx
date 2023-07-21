@@ -5,10 +5,15 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useUser } from '@/hooks/use-user';
 import { observer } from '@legendapp/state/react';
+import { UserPlatformRequest, Platforms } from '@/types';
+import axios from 'axios';
+import { PlatformsResultSchema } from '@/lib/validations/platforms';
 
 const getPlatforms = async () => {
-  const res = await fetch('/api/platforms');
-  const platforms = await res.json();
+  const data = await axios.get('/api/platforms').then((res) => res.data);
+
+  const platforms = PlatformsResultSchema.parse(data);
+
   return platforms;
 };
 
@@ -18,16 +23,12 @@ const submitPlatforms = async (
     longName: string;
   }[]
 ) => {
-  fetch('/api/user/platform', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ platforms: platforms.map((p) => p.name) }),
-  });
-};
+  const payload: UserPlatformRequest = {
+    platforms: platforms.map((p) => p.name),
+  };
 
-type Platform = { name: string; longName: string };
+  return await axios.post('/api/user/platform', payload);
+};
 
 interface UserPlatformsFormProps {
   withLink?: boolean;
@@ -36,22 +37,28 @@ interface UserPlatformsFormProps {
 export const UserPlatformsForm = observer(
   ({ withLink = false }: UserPlatformsFormProps) => {
     const user = useUser();
-    const [platforms, setPlatforms] = useState<Platform[]>([]);
-    const [ownerPlatforms, setOwnerPlatforms] = useState<Platform[]>(
+    const [platforms, setPlatforms] = useState<Platforms>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [ownerPlatforms, setOwnerPlatforms] = useState<Platforms>(
       user?.platforms.get() ?? []
     );
 
     useEffect(() => {
-      getPlatforms().then((platforms) => {
-        setPlatforms(platforms);
-      });
+      getPlatforms()
+        .then((platforms: Platforms) => {
+          setPlatforms(platforms);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsLoading(false);
+        });
     }, []);
 
     const handleAddRemovePlatform = (platform: {
       name: string;
       longName: string;
     }) => {
-      let platforms_tmp: Platform[] = [];
+      let platforms_tmp: Platforms = [];
 
       if (ownerPlatforms.some((e) => e.name == platform.name)) {
         platforms_tmp = ownerPlatforms.filter((p) => p.name !== platform.name);
@@ -85,7 +92,7 @@ export const UserPlatformsForm = observer(
                 </button>
               </li>
             ))}
-            {platforms.length === 0 &&
+            {isLoading &&
               Array.from(Array(12).keys()).map((i) => (
                 <li key={i}>
                   <div
@@ -107,7 +114,7 @@ export const UserPlatformsForm = observer(
               'bg-indigo-600'
             )}
             href={{
-              pathname: '/games',
+              pathname: '/app',
             }}
           >
             Continue
@@ -118,7 +125,7 @@ export const UserPlatformsForm = observer(
             type='button'
             className={cn(buttonVariants({ variant: 'link' }))}
             href={{
-              pathname: '/games',
+              pathname: '/app',
             }}
           >
             Skip
