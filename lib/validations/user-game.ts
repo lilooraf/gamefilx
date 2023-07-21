@@ -8,16 +8,16 @@ export const userGamePostSchema = z.object({
   game: z.object({
     id: z.number(),
     name: z.string(),
-    topCriticScore: z.number(),
+    topCriticScore: z.number().nullable(),
     images: z.object({
       box: z.object({
-        og: z.string(),
-        sm: z.string(),
+        og: z.string().optional().nullable(),
+        sm: z.string().optional().nullable(),
       }).optional(),
       banner: z.object({
-        og: z.string(),
-        sm: z.string(),
-      }).nullable(),
+        og: z.string().optional().nullable(),
+        sm: z.string().optional().nullable(),
+      }).optional(),
     }),
   }),
 })
@@ -25,3 +25,19 @@ export const userGamePostSchema = z.object({
 export const userGameDeleteSchema = z.object({
   gameId: z.number(),
 })
+
+export const userGameResultSchema = z.array(z.object({
+  id: z.number(),
+    name: z.string(),
+    topCriticScore: z.number().nullable(),
+    images: z.object({
+      box: z.object({
+        og: z.string().optional(),
+        sm: z.string().optional(),
+      }).optional(),
+      banner: z.object({
+        og: z.string().optional(),
+        sm: z.string().optional(),
+      }).optional(),
+    })
+}))
