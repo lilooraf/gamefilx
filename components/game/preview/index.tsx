@@ -37,7 +37,7 @@ const GamePreview = ({ game }: GameProps) => {
       <li
         onClick={() => setIsOpen(true)}
         style={{
-          backgroundColor: `rgba(${data}, 0.3)`,
+          backgroundColor: `rgba(${data}, 0.4)`,
         }}
         className='flex relative w-72 h-40 rounded-md p-2 cursor-pointer hover:scale-105 hover:z-10 dark:bg-gray-950 bg-white transition duration-150 ease-in-out '
       >
@@ -56,10 +56,10 @@ const GamePreview = ({ game }: GameProps) => {
               {game.name}
             </h4>
           </div>
-          {game.topCriticScore > 0 && (
+          {game.topCriticScore && game.topCriticScore > 0 && (
             <div className='flex absolute bottom-0 right-0 m-2 gap-1 font-mono'>
               <Icons.star className='w-4' />
-              {game.topCriticScore.toPrecision(2)}%
+              {game.topCriticScore && game.topCriticScore.toPrecision(2)}%
             </div>
           )}
         </div>

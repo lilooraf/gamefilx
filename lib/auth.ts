@@ -39,8 +39,6 @@ export const authOptions: NextAuthOptions = {
         where: {
           email: token.email,
         },
-      }).catch(() => {
-        console.log("Error finding user or timeout")
       })
 
       if (!dbUser) {

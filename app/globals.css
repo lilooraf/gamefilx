@@ -33,3 +33,23 @@ details > summary {
 details summary::-webkit-details-marker {
   display:none;
 }
+
+.star-1:hover {@apply text-yellow-500;}
+.star-2:hover {@apply text-yellow-500;}
+.star-3:hover {@apply text-yellow-500;}
+.star-4:hover {@apply text-yellow-500;}
+.star-5:hover {@apply text-yellow-500;}
+
+.star-2:hover ~ .star-1 {@apply text-yellow-500;}
+
+.star-3:hover ~ .star-2,
+.star-3:hover ~ .star-1 {@apply text-yellow-500;}
+
+.star-4:hover ~ .star-3,
+.star-4:hover ~ .star-2,
+.star-4:hover ~ .star-1 {@apply text-yellow-500;}
+
+.star-5:hover ~ .star-4,
+.star-5:hover ~ .star-3,
+.star-5:hover ~ .star-2,
+.star-5:hover ~ .star-1 {@apply text-yellow-500;}

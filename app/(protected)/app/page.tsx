@@ -68,7 +68,7 @@ const GamesPage = observer(() => {
         onClose={() => {
           setShowModal(false);
         }}
-        className='bg-slate-400 dark:bg-slate-800'
+        className='bg-slate-200 dark:bg-slate-800'
       >
         <div className='flex flex-col gap-8 justify-center items-center'>
           <p className='text-xl font-bold'>Select your platforms</p>

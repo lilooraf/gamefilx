@@ -1,86 +1,26 @@
-export type Game = {
-    id: number
-    name: string
-    topCriticScore: number
-}
+import * as z from "zod"
+import { GamesResultSchema } from "@/lib/validations/games"
+import { GameResultSchema } from "@/lib/validations/game"
+import { PlatformsResultSchema } from "@/lib/validations/platforms"
+import { userGamePostSchema, userGameDeleteSchema, userGameResultSchema } from "@/lib/validations/user-game"
+import { userPlatformSchema } from "@/lib/validations/user-platform"
 
-export type GameDetail = Game & {
-    description: string
-    firstReleaseDate: string
-    Genres: Genre[]
-    Platforms: Platform[]
-    Companies: Company[]
-    trailers: Trailer[]
-    images: Images
-}
 
-export type GameInfo = Game & {
-    images?: {
-        box?: {
-            og: string
-            sm: string
-        },
-        banner?: {
-            og: string
-            sm: string
-        },
-    }
-}
+export type GameDetail = z.infer<typeof GameResultSchema>
 
-export type Genre = {
-    id: number
-    name: string
-}
+export type GameInfo = z.infer<typeof GamesResultSchema>[0];
 
-export type Platform = {
-    id: number
-    name: string
-    shortName: string
-    imageSrc: string
-}
+export type Games = z.infer<typeof GamesResultSchema>
 
-export type Company = {
-    name: string
-    type: string
-}
+export type Platforms = z.infer<typeof PlatformsResultSchema>
 
-export type Trailer = {
-    specialName: string
-    externalUrl: string
-    videoId: string
-}
+export type UserGamePostRequest = z.infer<typeof userGamePostSchema>
 
-export type Images = {
-    box: {
-        og: string
-        sm: string
-    },
-    square: {
-        og: string
-        xs: string
-        sm: string
-        lg: string
-    },
-    masthead: {
-        og: string
-        xs: string
-        sm: string
-        md: string
-        lg: string
-        xl: string
-    },
-    banner: {
-        og: string
-        sm: string
-    },
-    logo: {
-        og: string
-    },
-    screenshots: [{
-        og: string
-        sm: string
-    }]
-}
+export type UserGameDeleteRequest = z.infer<typeof userGameDeleteSchema>
+
+export type UserGame = z.infer<typeof userGameResultSchema>
+
+export type UserPlatformRequest = z.infer<typeof userPlatformSchema>
 
 export type ImageType = 'box' | 'square' | 'masthead' | 'banner' | 'logo' | 'screenshots'
 

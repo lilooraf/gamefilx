@@ -46,7 +46,7 @@ export default function Login() {
           onClick={() => {
             setIsGitHubLoading(true);
             signIn('github', {
-              callbackUrl: searchParams?.get('from') || '/games',
+              callbackUrl: searchParams?.get('from') || '/app',
               redirect: false,
             });
           }}
@@ -66,7 +66,7 @@ export default function Login() {
           onClick={() => {
             setIsGoogleLoading(true);
             signIn('google', {
-              callbackUrl: searchParams?.get('from') || '/games',
+              callbackUrl: searchParams?.get('from') || '/app',
               redirect: false,
             });
           }}

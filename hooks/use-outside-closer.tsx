@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 
-
 export default function useOutsideCloser(ref: React.RefObject<HTMLDivElement>, callback: () => void) {
   useEffect(() => {
     function handleClickOutside(event: { target: any; }) {

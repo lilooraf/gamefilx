@@ -10,7 +10,7 @@ interface ModalProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   customColor?: [number, number, number];
 }
 
-export const Modal = ({ children, isOpen, onClose, customColor, className }: ModalProps) => {
+export const Modal = ({ children, isOpen, onClose, customColor, className }: ModalProps) => {                                                                                                                               
   const ref = React.useRef<HTMLDivElement>(null);
 
   useOutsideCloser(ref, () => {
@@ -30,7 +30,7 @@ export const Modal = ({ children, isOpen, onClose, customColor, className }: Mod
             <div
               style={{
                 ...(customColor && {
-                  backgroundColor: `rgba(${customColor}, 0.3)`,
+                  backgroundColor: `rgba(${customColor}, 0.4)`,
                 }),
               }}
               className={cn('flex h-full w-full p-8 rounded-md overscroll-contain overflow-y-auto max-h-[85vh]', className)}
