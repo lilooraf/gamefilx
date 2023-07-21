@@ -13,7 +13,7 @@ export const GameImages = ({ game, isLoading }: GameImagesProps) => {
   }
   return (
     <div className='flex space-x-2 group overflow-x-scroll scroll-smooth'>
-      {game?.images.screenshots?.map((screenshot) => (
+      {game?.images?.screenshots?.map((screenshot) => (
         <Image
           key={screenshot.og}
           alt='screenshot'
