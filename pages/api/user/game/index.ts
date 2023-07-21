@@ -31,8 +31,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             },
             update: {
               review: payload.review,
-              rating: payload.rating,
-              status: payload.status,
+              ...(payload.status && { status: payload.status }),
+              ...(payload.rating && { rating: payload.rating }),
               game: {
                 update: {
                   name: payload.game.name,
@@ -80,13 +80,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           game: true,
         },
       }).then((user) => {
-        // return array of games
         return user.map((userGame) => {
           return userGame.game
         })
       })
-
       return res.send(games)
+
     } else if (req.method === "DELETE") {
       const payload = userGameDeleteSchema.parse(body)
 
@@ -95,7 +94,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           id: `${user.id}-${payload.gameId}`,
         },
       }).then(() => {
-        console.log("deleted")
         res.status(200).end()
       })
       return res.end()

@@ -33,7 +33,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           })
 
           // add platforms to user
-
           await db.userPlatform.createMany({
             data: payload.platforms.map((platform) => {
               return {
