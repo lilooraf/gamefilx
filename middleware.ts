@@ -11,7 +11,7 @@ export default withAuth(
 
     if (isAuthPage) {
       if (isAuth) {
-        return NextResponse.redirect(new URL("/games", req.url))
+        return NextResponse.redirect(new URL("/app", req.url))
       }
 
       return null
@@ -40,6 +40,8 @@ export default withAuth(
   }
 )
 
+// Must contail every path that requires authentication: app/(protected), login
+
 export const config = {
-  matcher: ["/games/:path*", "/login",],
+  matcher: ["/app/:path*", "/login", "/new-user",],
 }
