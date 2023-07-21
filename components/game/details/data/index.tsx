@@ -27,7 +27,7 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
             {game?.Genres.map((genre) => (
               <div
                 key={genre.id}
-                className='p-1 border rounded-md whitespace-nowrap'
+                className='p-1 border border-slate-700 dark:border-slate-200 rounded-md whitespace-nowrap'
               >
                 {genre.name}
               </div>
@@ -40,7 +40,7 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
             {game?.Platforms.map((platform) => (
               <div
                 key={platform.id}
-                className='p-1 border rounded-md whitespace-nowrap'
+                className='p-1 border border-slate-700 dark:border-slate-200 rounded-md whitespace-nowrap'
               >
                 {platform.shortName}
               </div>

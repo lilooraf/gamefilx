@@ -27,7 +27,7 @@ export default function MobileNav({ items, user }: NavProps) {
   });
 
   return (
-    <div className='sticky top-0 z-40 flex items-center justify-center  bg-gradient-to-b from-black via-black to-transparent'>
+    <div className='sticky top-0 z-40 flex items-center justify-center bg-gradient-to-b from-white dark:from-black via-white dark:via-black to-transparent'>
       <div className='relative w-full lg:hidden'>
         <nav className='mx-5 py-4 justify-between  flex gap-6 '>
           <Button
@@ -37,7 +37,7 @@ export default function MobileNav({ items, user }: NavProps) {
             className='p-0 w-8 h-8'
             variant={'ghost'}
           >
-            <Icons.menu className='w-8 h-8 text-indigo-500' />
+            <Icons.menu className='w-8 h-8' />
           </Button>
 
           <Link href='/'>
@@ -48,7 +48,7 @@ export default function MobileNav({ items, user }: NavProps) {
         </nav>
         {isMenuOpen && (
           <div className='absolute top-16 w-full z-50 flex justify-center'>
-            <div ref={ref} className='bg-slate-800 px-8 py-2 rounded-md'>
+            <div ref={ref} className='dark:bg-slate-800 bg-slate-200 px-8 py-2 rounded-md'>
               <NavLinks
                 items={items}
                 onClickLink={() => setIsMenuOpen(false)}

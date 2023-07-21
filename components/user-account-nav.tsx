@@ -42,12 +42,10 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         {showMenu && (
           <div
             ref={ref}
-            className='absolute z-40 top-12 right-0 p-2 flex flex-col gap-1 w-44 rounded-md dark:bg-slate-800 bg-slate-50 drop-shadow-md'
+            className='absolute z-40 top-12 right-0 p-2 flex flex-col gap-1 w-44 rounded-md dark:bg-slate-800 bg-slate-200 drop-shadow-md'
           >
             <div className='flex flex-col pb-1 border-b border-slate-300 dark:border-gray-500'>
-              <span className='text-sm font-semibold'>
-                {user?.name}
-              </span>
+              <span className='text-sm font-semibold'>{user?.name}</span>
               <span className='text-xs opacity-50'>{user?.email}</span>
             </div>
             <Button
@@ -81,7 +79,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         onClose={() => {
           setShowModal(false);
         }}
-        className='bg-slate-400 dark:bg-slate-800'
+        className='bg-slate-200 dark:bg-slate-800'
       >
         <div className='flex flex-col gap-8 justify-center items-center'>
           <p className='text-xl font-bold'>Select your platforms</p>

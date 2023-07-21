@@ -22,8 +22,8 @@ export function NavLinks({ items, onClickLink }: NavLinksProps) {
             onClick={onClickLink}
             className={cn(
               buttonVariants({ variant: 'link' }),
-              'p-0 font-bold text-xl',
-              path == item.target && 'text-indigo-500 dark:text-indigo-500'
+              'p-0 font-bold text-xl text-black/60 dark:text-white/60',
+              path == item.target && 'text-black dark:text-white'
             )}
           >
             {item.title}
