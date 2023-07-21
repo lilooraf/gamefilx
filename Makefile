@@ -48,6 +48,13 @@ app-$(NODE_ENV)-down-clean:
 	@echo -e "\n\t 🚨 🚧 ⭕️ 🛑 ⛔️\n\n"
 	@docker-compose -f docker-compose.$(NODE_ENV).yml -p $(DIR) down --remove-orphans --volumes
 
+##make db-[MODE]-log          Run the database with logs.
+## 
+db-$(NODE_ENV)-log:
+	@echo -e "\n\t 🎧 🤖 \n\t💻 🔧 💉\n\t🚀 🛸 🛰\n"
+	@docker-compose -f docker-compose.$(NODE_ENV).yml -p $(DIR) up database --build
+
+
 ##------------------------------TOOLS----------------------------------------------------------------------
 ##
 
