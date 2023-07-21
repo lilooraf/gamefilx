@@ -12,6 +12,9 @@ import {
   LucideProps,
   MenuIcon,
   Check,
+  Bookmark,
+  Rocket,
+  Trash,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -28,6 +31,10 @@ export const Icons = {
   spinner: Loader2,
   menu: MenuIcon,
   check: Check,
+  bookmark: Bookmark,
+  rocket: Rocket,
+  gamePad: Gamepad2,
+  trash: Trash,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
