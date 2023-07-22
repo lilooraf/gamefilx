@@ -36,7 +36,7 @@ const GameDetails = ({ game }: GameDetailsProps) => {
     setLoading(false);
   };
 
-  if (isError) {
+  if (isError || !gameData) {
     return <p className='p-2 text-xl font-medium'>Something went wrong</p>;
   }
 
