@@ -13,7 +13,7 @@ export const UserLibrary = observer(() => {
       <div className='w-32'>
         <select
           id='countries'
-          className='cursor-pointer bg-slate-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 dark:bg-slate-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
+          className='block w-full cursor-pointer rounded-lg border border-gray-300 bg-slate-200 p-2 text-sm text-gray-900 dark:border-gray-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-400'
           value={user.library_filter.get()}
           onChange={(e) => {
             user.library_filter.set(e.target.value as Status);
@@ -25,7 +25,7 @@ export const UserLibrary = observer(() => {
         </select>
       </div>
       <div className='flex justify-center md:justify-start'>
-        <div className='flex flex-wrap gap-4 justify-center'>
+        <div className='flex flex-wrap justify-center gap-4'>
           {user.games
             .get()
             .filter((game) => game.status == user.library_filter.get())

@@ -15,10 +15,10 @@ export default async function NavBar({ items }: NavProps) {
 
   return (
     <>
-      <nav className='px-5 py-4 justify-between sticky top-0 bg-gradient-to-b from-white dark:from-black via-white dark:via-black to-transparent z-40 hidden gap-6 lg:flex'>
+      <nav className='sticky top-0 z-40 hidden justify-between gap-6 bg-gradient-to-b from-white via-white to-transparent px-5 py-4 dark:from-black dark:via-black lg:flex'>
         <div className='flex items-center gap-3 pr-3'>
           <Link href='/'>
-            <Icons.app className='w-8 h-8 text-indigo-500' />
+            <Icons.app className='h-8 w-8 text-indigo-500' />
           </Link>
           <NavLinks items={items} />
         </div>

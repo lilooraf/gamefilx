@@ -27,13 +27,13 @@ export const GameList = ({ games, id }: GameListProps) => {
   return (
     <div
       id={'slider' + id}
-      className='flex items-center group overflow-x-scroll scroll-smooth scrollbar-hidden snap-mandatory snap-x'
+      className='scrollbar-hidden group flex snap-x snap-mandatory items-center overflow-x-scroll scroll-smooth'
     >
       <div
         onClick={slideLeft}
-        className='cursor-pointer absolute left-0 z-30 bg-gradient-to-l from-transparent dark:to-black dark:via-black/70 to-white via-white/70 group-hover:opacity-100 opacity-0 p-2 h-full items-center transition-opacity duration-300'
+        className='absolute left-0 z-30 h-full cursor-pointer items-center bg-gradient-to-l from-transparent via-white/70 to-white p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:via-black/70 dark:to-black'
       >
-        <Icons.chevronLeft className='h-full w-10 hover:scale-125 transition-transform ' />
+        <Icons.chevronLeft className='h-full w-10 transition-transform hover:scale-125 ' />
       </div>
       <ul className='flex gap-3 p-5'>
         {games?.map((game) => (
@@ -42,9 +42,9 @@ export const GameList = ({ games, id }: GameListProps) => {
       </ul>
       <div
         onClick={slideRight}
-        className='cursor-pointer absolute right-0 z-30 bg-gradient-to-r from-transparent dark:to-black dark:via-black/70 to-white via-white/70 group-hover:opacity-100 opacity-0 p-2 h-full items-center transition-opacity duration-300'
+        className='absolute right-0 z-30 h-full cursor-pointer items-center bg-gradient-to-r from-transparent via-white/70 to-white p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:via-black/70 dark:to-black'
       >
-        <Icons.chevronRight className='h-full w-10 hover:scale-125 transition-transform ' />
+        <Icons.chevronRight className='h-full w-10 transition-transform hover:scale-125 ' />
       </div>
     </div>
   );

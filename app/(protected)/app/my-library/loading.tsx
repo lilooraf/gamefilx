@@ -4,9 +4,9 @@ export default function MyLibraryLoadingPage() {
   return (
     <div className='px-4'>
       <div className='flex flex-col gap-4'>
-        <div className='w-32 h-8 animate-pulse dark:bg-slate-600 bg-slate-300 rounded-md'></div>
+        <div className='h-8 w-32 animate-pulse rounded-md bg-slate-300 dark:bg-slate-600'></div>
         <div className='flex justify-center md:justify-start'>
-          <div className='flex flex-wrap gap-4 justify-center'>
+          <div className='flex flex-wrap justify-center gap-4'>
             {Array.from(Array(5).keys()).map((index) => (
               <GamePreviewSkeleton key={index} delay={index * 100} />
             ))}

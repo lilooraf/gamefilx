@@ -15,14 +15,14 @@ export const GameImageBanner = ({
 }: GameDetailsImageProps) => {
   if (isLoading) {
     return (
-      <div className='aspect-video h-full w-full self-center bg-gray-200/20 animate-pulse rounded-sm'></div>
+      <div className='aspect-video h-full w-full animate-pulse self-center rounded-sm bg-gray-200/20'></div>
     );
   }
   if (game?.images?.masthead?.og || game?.images?.banner?.og) {
     return (
       <>
         <Image
-          className='rounded-sm self-center h-full w-full object-cover bg-gray-200/20'
+          className='h-full w-full self-center rounded-sm bg-gray-200/20 object-cover'
           src={
             'https://img.opencritic.com/' +
             (game?.images.masthead?.og || game?.images.banner?.og)
@@ -37,7 +37,7 @@ export const GameImageBanner = ({
   } else if (topCriticScore && topCriticScore > 0) {
     return (
       <>
-        <div className='h-full w-full bg-gray-200/20 rounded-sm'></div>
+        <div className='h-full w-full rounded-sm bg-gray-200/20'></div>
         <GameScore topCriticScore={topCriticScore} />
       </>
     );
@@ -50,7 +50,7 @@ interface GameScoreProps {
 
 const GameScore = ({ topCriticScore }: GameScoreProps) => {
   return (
-    <div className='flex absolute bottom-0 right-0 m-1 bg-white/70 dark:bg-black/70 p-1 rounded-md space-x-1 font-mono'>
+    <div className='absolute bottom-0 right-0 m-1 flex space-x-1 rounded-md bg-white/70 p-1 font-mono dark:bg-black/70'>
       <Icons.star className='w-4' />
       <p>{topCriticScore.toPrecision(2)}%</p>
     </div>

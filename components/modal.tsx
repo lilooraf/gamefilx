@@ -10,7 +10,7 @@ interface ModalProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   customColor?: [number, number, number];
 }
 
-export const Modal = ({ children, isOpen, onClose, customColor, className }: ModalProps) => {                                                                                                                               
+export const Modal = ({ children, isOpen, onClose, customColor, className }: ModalProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   useOutsideCloser(ref, () => {
@@ -21,11 +21,11 @@ export const Modal = ({ children, isOpen, onClose, customColor, className }: Mod
     <>
       {isOpen && (
         <div
-          className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 z-40 blurry-background`}
+          className={`blurry-background fixed inset-0 z-40 flex items-center justify-center bg-black/50 transition-opacity duration-300`}
         >
           <div
             ref={ref}
-            className={`bg-white m-2 relative dark:bg-black rounded-md shadow-xl transform transition-transform duration-300 z-50 `}
+            className={`relative z-50 m-2 rounded-md bg-white shadow-xl transition-transform duration-300 dark:bg-black`}
           >
             <div
               style={{
@@ -33,16 +33,16 @@ export const Modal = ({ children, isOpen, onClose, customColor, className }: Mod
                   backgroundColor: `rgba(${customColor}, 0.4)`,
                 }),
               }}
-              className={cn('flex h-full w-full p-8 rounded-md overscroll-contain overflow-y-auto max-h-[85vh]', className)}
+              className={cn('flex h-full max-h-[85vh] w-full overflow-y-auto overscroll-contain rounded-md p-8', className)}
             >
               {children}
             </div>
             <div>
               <button
-                className='absolute top-0 right-0 m-2 h-8 w-8 flex items-center justify-center group/button'
+                className='group/button absolute right-0 top-0 m-2 flex h-8 w-8 items-center justify-center'
                 onClick={() => onClose()}
               >
-                <Icons.close className='w-5 group-hover/button:scale-125 transition-transform' />
+                <Icons.close className='w-5 transition-transform group-hover/button:scale-125' />
               </button>
             </div>
           </div>

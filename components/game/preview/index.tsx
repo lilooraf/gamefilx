@@ -39,7 +39,7 @@ const GamePreview = ({ game }: GameProps) => {
         style={{
           backgroundColor: `rgba(${data}, 0.4)`,
         }}
-        className='flex relative w-72 h-40 rounded-md p-2 cursor-pointer hover:scale-105 hover:z-10 dark:bg-gray-950 bg-white transition duration-150 ease-in-out snap-center'
+        className='relative flex h-40 w-72 cursor-pointer snap-center rounded-md bg-white p-2 transition duration-150 ease-in-out hover:z-10 hover:scale-105 dark:bg-gray-950'
       >
         <div
           className={`flex gap-2 ${
@@ -57,7 +57,7 @@ const GamePreview = ({ game }: GameProps) => {
             </h4>
           </div>
           {game.topCriticScore && game.topCriticScore > 0 && (
-            <div className='flex absolute bottom-0 right-0 m-2 gap-1 font-mono'>
+            <div className='absolute bottom-0 right-0 m-2 flex gap-1 font-mono'>
               <Icons.star className='w-4' />
               {game.topCriticScore && game.topCriticScore.toPrecision(2)}%
             </div>

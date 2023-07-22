@@ -73,9 +73,9 @@ export const UserPlatformsForm = observer(
     };
 
     return (
-      <div className='flex flex-col justify-center items-center gap-4'>
+      <div className='flex flex-col items-center justify-center gap-4'>
         <div className='flex flex-col gap-4'>
-          <ul className='flex flex-wrap justify-center items-center gap-2 max-w-xl'>
+          <ul className='flex max-w-xl flex-wrap items-center justify-center gap-2'>
             {platforms?.map((platform) => (
               <li key={platform.name}>
                 <button
@@ -83,7 +83,7 @@ export const UserPlatformsForm = observer(
                   className={cn(
                     buttonVariants({ variant: 'default' }),
                     ownerPlatforms.find((e) => e.name == platform.name) &&
-                      'bg-orange-400 dark:bg-orange-500 hover:bg-orange-500 dark:hover:bg-orange-700'
+                      'bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-700'
                   )}
                   onClick={() => handleAddRemovePlatform(platform)}
                 >
@@ -99,7 +99,7 @@ export const UserPlatformsForm = observer(
                     style={{
                       animationDelay: `${i * 0.1}s`,
                     }}
-                    className='w-32 h-10 bg-slate-200/20 animate-pulse rounded-md'
+                    className='h-10 w-32 animate-pulse rounded-md bg-slate-200/20'
                   ></div>
                 </li>
               ))}

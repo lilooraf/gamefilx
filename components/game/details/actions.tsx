@@ -198,11 +198,11 @@ const GameActions = observer(({ game }: GameActionsProps) => {
   return (
     <>
       <Button variant={'outline'} className='group/action relative'>
-        <div className='absolute bottom-0 md:mr-3 pb-12 hidden group-hover/action:flex flex-col gap-2 w-32'>
+        <div className='absolute bottom-0 hidden w-32 flex-col gap-2 pb-12 group-hover/action:flex md:mr-3'>
           {userGameStatus !== 'WISH_LIST' && (
             <Button
               variant={'default'}
-              className='justify-between whitespace-nowrap gap-2'
+              className='justify-between gap-2 whitespace-nowrap'
               onClick={() => {
                 handleLibraryAction('WISH_LIST');
               }}
@@ -214,7 +214,7 @@ const GameActions = observer(({ game }: GameActionsProps) => {
           {userGameStatus !== 'PLAYING' && (
             <Button
               variant={'default'}
-              className='justify-between whitespace-nowrap gap-2'
+              className='justify-between gap-2 whitespace-nowrap'
               onClick={() => {
                 handleLibraryAction('PLAYING');
               }}
@@ -226,7 +226,7 @@ const GameActions = observer(({ game }: GameActionsProps) => {
           {userGameStatus !== 'COMPLETED' && (
             <Button
               variant={'default'}
-              className='justify-between whitespace-nowrap gap-2'
+              className='justify-between gap-2 whitespace-nowrap'
               onClick={() => {
                 handleLibraryAction('COMPLETED');
               }}
@@ -238,7 +238,7 @@ const GameActions = observer(({ game }: GameActionsProps) => {
           {isInUserLibrary && (
             <Button
               variant={'destructive'}
-              className='justify-between whitespace-nowrap gap-2'
+              className='justify-between gap-2 whitespace-nowrap'
               onClick={() => {
                 handleLibraryAction();
               }}
@@ -261,8 +261,8 @@ const GameActions = observer(({ game }: GameActionsProps) => {
       </Button>
       {isInUserLibrary && (
         <Button variant={'outline'} className='group/rating relative gap-1'>
-          <div className='absolute bottom-0 md:mr-3 pb-12 hidden group-hover/rating:flex'>
-            <div className='flex flex-row-reverse rounded-md p-1 bg-slate-200 dark:bg-slate-800 drop-shadow-md'>
+          <div className='absolute bottom-0 hidden pb-12 group-hover/rating:flex md:mr-3'>
+            <div className='flex flex-row-reverse rounded-md bg-slate-200 p-1 drop-shadow-md dark:bg-slate-800'>
               <Icons.star
                 className='star-5 p-0'
                 onClick={() => {

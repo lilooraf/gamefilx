@@ -14,7 +14,7 @@ export function NavLinks({ items, onClickLink }: NavLinksProps) {
   const path = usePathname();
 
   return (
-    <ul className='flex flex-col md:flex-row gap-5 text-xl font-light items-center align-middle'>
+    <ul className='flex flex-col items-center gap-5 align-middle text-xl font-light md:flex-row'>
       {items.map((item) => (
         <li key={item.target}>
           <Link
@@ -22,7 +22,7 @@ export function NavLinks({ items, onClickLink }: NavLinksProps) {
             onClick={onClickLink}
             className={cn(
               buttonVariants({ variant: 'link' }),
-              'p-0 font-bold text-xl text-black/60 dark:text-white/60',
+              'p-0 text-xl font-bold text-black/60 dark:text-white/60',
               path == item.target && 'text-black dark:text-white'
             )}
           >
