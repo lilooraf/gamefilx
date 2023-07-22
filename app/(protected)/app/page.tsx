@@ -1,5 +1,5 @@
 import { GamesSection } from "@/components/game/section"
-import { GamesUserPlatforms } from "@/components/game/games-user-platform"
+import { SectionsUserPlatforms } from "@/components/game/sections-user-platform"
 import { gameLists } from "@/config/game-lists"
 
 const GamesPage = () => {
@@ -9,7 +9,7 @@ const GamesPage = () => {
       {gameLists.map((gameList, index) => (
         <GamesSection key={gameList.title} gameList={gameList} id={index} />
       ))}
-      <GamesUserPlatforms />
+      <SectionsUserPlatforms />
     </div>
   )
 }
