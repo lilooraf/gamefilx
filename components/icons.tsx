@@ -15,6 +15,9 @@ import {
   Bookmark,
   Rocket,
   Trash,
+  Video,
+  Search,
+  BarChart2,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -35,6 +38,9 @@ export const Icons = {
   rocket: Rocket,
   gamePad: Gamepad2,
   trash: Trash,
+  video: Video,
+  search: Search,
+  barChart: BarChart2,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
