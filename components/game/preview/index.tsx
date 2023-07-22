@@ -40,7 +40,7 @@ const GamePreview = ({ game }: GameProps) => {
         style={{
           backgroundColor: `rgba(${data}, 0.4)`,
         }}
-        className="relative flex h-40 w-72 cursor-pointer snap-center rounded-md bg-white p-2 transition duration-150 ease-in-out hover:z-10 hover:scale-105 dark:bg-gray-950"
+        className="relative flex h-40 w-72 cursor-pointer snap-center rounded-md bg-white p-2 transition duration-150 ease-in-out hover:z-10 hover:scale-105 dark:bg-gray-950 lg:snap-proximity lg:snap-align-none"
       >
         <div
           className={`flex gap-2 ${

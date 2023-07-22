@@ -13,14 +13,14 @@ export const GameList = ({ games, id }: GameListProps) => {
   const slideLeft = () => {
     const slider = document.getElementById("slider" + id)
     if (slider) {
-      slider.scrollLeft -= 200
+      slider.scrollLeft -= 300
     }
   }
 
   const slideRight = () => {
     const slider = document.getElementById("slider" + id)
     if (slider) {
-      slider.scrollLeft += 200
+      slider.scrollLeft += 300
     }
   }
 
