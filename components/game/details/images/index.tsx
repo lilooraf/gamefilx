@@ -12,12 +12,12 @@ export const GameImages = ({ game, isLoading }: GameImagesProps) => {
     return <GameImagesSkeleton />
   }
   return (
-    <div className='flex space-x-2 group overflow-x-scroll scroll-smooth'>
+    <div className='flex space-x-2 group overflow-x-scroll scroll-smooth snap-mandatory snap-x'>
       {game?.images?.screenshots?.map((screenshot) => (
         <Image
           key={screenshot.og}
           alt='screenshot'
-          className='rounded-sm self-center w-64 md:w-96 aspect-video bg-gray-200/20'
+          className='rounded-sm self-center w-64 md:w-96 aspect-video bg-gray-200/20 snap-center'
           src={`https://img.opencritic.com/${screenshot.og}`}
           width={800}
           height={800}

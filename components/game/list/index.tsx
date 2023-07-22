@@ -27,7 +27,7 @@ export const GameList = ({ games, id }: GameListProps) => {
   return (
     <div
       id={'slider' + id}
-      className='flex items-center group overflow-x-scroll scroll-smooth scrollbar-hidden'
+      className='flex items-center group overflow-x-scroll scroll-smooth scrollbar-hidden snap-mandatory snap-x'
     >
       <div
         onClick={slideLeft}
