@@ -11,9 +11,9 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
   if (isLoading || !game) return <GameDataSkeleton />;
 
   return (
-    <div className='flex flex-col w-full justify-between lg:flex-row xl:flex-col space-y-2 lg:space-x-2 lg:space-y-0 xl:space-x-0 xl:space-y-2'>
-      <div className='space-y-2  min-w-fit'>
-        <p className='text-sm font-bold line-clamp-2 '>
+    <div className='flex w-full flex-col justify-between space-y-2 lg:flex-row lg:space-x-2 lg:space-y-0 xl:flex-col xl:space-x-0 xl:space-y-2'>
+      <div className='min-w-fit  space-y-2'>
+        <p className='line-clamp-2 text-sm font-bold '>
           By{' '}
           {game?.Companies.map((company) => (
             <span key={company.name}>
@@ -23,11 +23,11 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
         </p>
         <div className='flex flex-col space-y-1'>
           <p className='text-xs font-bold'>Genre</p>
-          <div className='flex flex-wrap text-xs gap-1'>
+          <div className='flex flex-wrap gap-1 text-xs'>
             {game?.Genres.map((genre) => (
               <div
                 key={genre.id}
-                className='p-1 border border-slate-700 dark:border-slate-200 rounded-md whitespace-nowrap'
+                className='whitespace-nowrap rounded-md border border-slate-700 p-1 dark:border-slate-200'
               >
                 {genre.name}
               </div>
@@ -36,18 +36,18 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
         </div>
         <div className='flex flex-col space-y-1'>
           <p className='flex flex-wrap gap-1 text-xs font-bold'>Platform</p>
-          <div className='flex flex-wrap text-xs gap-1'>
+          <div className='flex flex-wrap gap-1 text-xs'>
             {game?.Platforms.map((platform) => (
               <div
                 key={platform.id}
-                className='p-1 border border-slate-700 dark:border-slate-200 rounded-md whitespace-nowrap'
+                className='whitespace-nowrap rounded-md border border-slate-700 p-1 dark:border-slate-200'
               >
                 {platform.shortName}
               </div>
             ))}
           </div>
         </div>
-        <p className='text-xs font-bold line-clamp-2'>
+        <p className='line-clamp-2 text-xs font-bold'>
           Published:{' '}
           {new Date(game.firstReleaseDate).toLocaleString('en-US', {
             year: 'numeric',
@@ -55,16 +55,16 @@ export const GameData = ({ game, isLoading }: GameDataProps) => {
             day: 'numeric',
           })}
         </p>
-        <div className='lg:hidden flex justify-around'>
+        <div className='flex justify-around lg:hidden'>
           <GameActions game={game} />
         </div>
       </div>
 
-      <div className='overflow-y-auto overflow-hidden max-h-24 lg:max-h-44 xl:max-h-none'>
+      <div className='max-h-24 overflow-hidden overflow-y-auto lg:max-h-44 xl:max-h-none'>
         <p className='text-sm'>{game?.description}</p>
       </div>
 
-      <div className='hidden lg:flex lg:flex-col justify-around xl:flex-row'>
+      <div className='hidden justify-around lg:flex lg:flex-col xl:flex-row'>
         <GameActions game={game} />
       </div>
     </div>

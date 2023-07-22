@@ -32,7 +32,7 @@ export default function Login() {
       <div className='flex flex-col items-center gap-8'>
         <h2 className='text-2xl font-bold'>
           Welcome to{' '}
-          <span className='text-indigo-500  font-extrabold'>GameFlix</span>
+          <span className='font-extrabold  text-indigo-500'>GameFlix</span>
         </h2>
 
         <div className='relative flex justify-center text-xs uppercase'>

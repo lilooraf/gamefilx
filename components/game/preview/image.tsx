@@ -14,7 +14,7 @@ export const GamePreviewImage = ({ game }: GameProps) => {
 
     return (
       <Image
-        className={`rounded-sm h-32 ${
+        className={`h-32 rounded-sm ${
           type == 'banner' ? 'order-2 w-52' : 'w-20'
         } self-center`}
         src={
@@ -28,7 +28,7 @@ export const GamePreviewImage = ({ game }: GameProps) => {
     );
   } else {
     return (
-      <div className='h-32 w-20 self-center bg-gray-200/20 rounded-sm'></div>
+      <div className='h-32 w-20 self-center rounded-sm bg-gray-200/20'></div>
     );
   }
 };

@@ -10,14 +10,14 @@ export default async function NewUserPage() {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center gap-8'>
-      <div className='flex flex-col justify-center items-center gap-5'>
+    <div className='flex flex-col items-center justify-center gap-8'>
+      <div className='flex flex-col items-center justify-center gap-5'>
         <h2 className='text-3xl font-bold'>Welcome {user?.name} 🎉</h2>
         <p className='text-lg'>
           You are now logged in. You can now start adding games to your library.
         </p>
       </div>
-      <div className='flex flex-col justify-center items-center gap-10'>
+      <div className='flex flex-col items-center justify-center gap-10'>
         <p className='text-lg'>
           But first, we need to know what platforms you own. Please select the
           platforms you own below.

@@ -37,17 +37,17 @@ const GameDetails = ({ game }: GameDetailsProps) => {
   };
 
   if (isError) {
-    return <p className='p-2 font-medium text-xl'>Something went wrong</p>;
+    return <p className='p-2 text-xl font-medium'>Something went wrong</p>;
   }
 
   return (
-    <div className='flex flex-col space-y-2 gap-2 w-64 sm:w-80 md:w-96 lg:w-[50rem] xl:w-[70rem]'>
+    <div className='flex w-64 flex-col gap-2 space-y-2 sm:w-80 md:w-96 lg:w-[50rem] xl:w-[70rem]'>
       <div className='max-w-[32rem]'>
-        <p className='mb-2 font-medium text-xl line-clamp-2'>{game.name}</p>
+        <p className='mb-2 line-clamp-2 text-xl font-medium'>{game.name}</p>
       </div>
-      <div className='flex gap-4 flex-col xl:flex-row lg:h-full xl:h-[28rem]'>
+      <div className='flex flex-col gap-4 lg:h-full xl:h-[28rem] xl:flex-row'>
         <div className='flex flex-col'>
-          <div className='relative aspect-video h-full flex justify-center items-center w-64 sm:w-80 md:w-[24rem] lg:w-[50rem]'>
+          <div className='relative flex aspect-video h-full w-64 items-center justify-center sm:w-80 md:w-[24rem] lg:w-[50rem]'>
             <GameImageBanner
               game={gameData}
               isLoading={isLoading}

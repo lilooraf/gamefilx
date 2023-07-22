@@ -5,7 +5,7 @@ export const GameImagesSkeleton = () => {
         {Array.from({ length: 3 }).map((value, index) => (
           <li
             key={index}
-            className='rounded-sm self-center w-64 md:w-96 overflow-hidden aspect-video bg-gray-200/20 animate-pulse'
+            className='aspect-video w-64 animate-pulse self-center overflow-hidden rounded-sm bg-gray-200/20 md:w-96'
           ></li>
         ))}
       </ul>

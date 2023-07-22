@@ -36,11 +36,11 @@ const GamesPage = observer(() => {
         id={3}
       />
       {user.platforms.get()?.length ? (
-        <div className='pl-8 p-2 mx-4 border-b-2 border-slate-200/20'>
+        <div className='mx-4 border-b-2 border-slate-200/20 p-2 pl-8'>
           <p className='text-2xl font-bold'>For your platforms 👾</p>
         </div>
       ) : (
-        <div className='flex justify-center items-center pb-2'>
+        <div className='flex items-center justify-center pb-2'>
           <Button
             variant='ghost'
             className=' font-bold'
@@ -70,7 +70,7 @@ const GamesPage = observer(() => {
         }}
         className='bg-slate-200 dark:bg-slate-800'
       >
-        <div className='flex flex-col gap-8 justify-center items-center'>
+        <div className='flex flex-col items-center justify-center gap-8'>
           <p className='text-xl font-bold'>Select your platforms</p>
           <UserPlatformsForm />
         </div>

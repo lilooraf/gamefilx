@@ -58,7 +58,7 @@ export function GamesSection({ gameList, id }: GamesProps) {
     return (
       <div className='flex flex-col p-2'>
         <h4 className='pl-6 text-lg font-bold'>{gameList.title}</h4>
-        <p className='pl-6 p-2 font-medium text-md'>Something went wrong</p>
+        <p className='text-md p-2 pl-6 font-medium'>Something went wrong</p>
       </div>
     );
   }
