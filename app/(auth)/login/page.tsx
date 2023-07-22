@@ -31,10 +31,12 @@ export default function Login() {
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex flex-col items-center gap-8">
-        <h2 className="text-2xl font-bold">
-          Welcome to{" "}
-          <span className="font-extrabold  text-indigo-500">GameFlix</span>
-        </h2>
+        <p className="mb-7 text-center text-5xl font-bold">
+          Welcome to Game
+          <span className="bg-gradient-to-t from-indigo-500 to-black bg-clip-text text-transparent dark:to-white">
+            flix
+          </span>
+        </p>
 
         <div className="relative flex justify-center text-xs uppercase">
           <span className="px-2 text-slate-600">Connect with</span>
