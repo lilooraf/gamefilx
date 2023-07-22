@@ -1,20 +1,21 @@
-import type { Metadata } from 'next';
-import { getCurrentUser } from '@/lib/session';
-import { db } from '@/lib/db';
-import { User } from 'next-auth';
-import { UserProvider } from '@/hooks/use-user';
-import { GameInfo } from '@/types';
+import type { Metadata } from "next"
+import { User } from "next-auth"
+
+import { getCurrentUser } from "@/lib/session"
+import { db } from "@/lib/db"
+import { UserProvider } from "@/hooks/use-user"
+import { GameInfo } from "@/types"
 
 export const metadata: Metadata = {
-  title: 'GameFlix',
+  title: "GameFlix",
   description: "Today's recommendations",
-};
+}
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic"
 
 const getUserPlatforms = (
   user?: User & {
-    id: string;
+    id: string
   }
 ) => {
   return db.user
@@ -32,15 +33,15 @@ const getUserPlatforms = (
     })
     .then((user) => {
       const userPlatforms = user?.userPlatforms.map((userPlatform) => {
-        return userPlatform.platform;
-      });
-      return userPlatforms;
-    });
-};
+        return userPlatform.platform
+      })
+      return userPlatforms
+    })
+}
 
 const getUserGames = (
   user?: User & {
-    id: string;
+    id: string
   }
 ) => {
   return db.user
@@ -69,20 +70,20 @@ const getUserGames = (
             status: userGame.status,
             rating: userGame.rating,
             game: userGame.game,
-          };
-        }) || [];
-      return userGames;
-    });
-};
+          }
+        }) || []
+      return userGames
+    })
+}
 
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const user = await getCurrentUser();
-  const platforms = await getUserPlatforms(user);
-  const games = await getUserGames(user);
+  const user = await getCurrentUser()
+  const platforms = await getUserPlatforms(user)
+  const games = await getUserGames(user)
 
   return (
     <>
@@ -101,12 +102,12 @@ export default async function RootLayout({
             rating: game?.rating,
             review: game?.review,
             status: game.status,
-            game: game.game as GameInfo
+            game: game.game as GameInfo,
           })),
         }}
       >
         {children}
       </UserProvider>
     </>
-  );
+  )
 }

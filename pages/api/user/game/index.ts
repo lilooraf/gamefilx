@@ -9,7 +9,6 @@ import { db } from "@/lib/db"
 import { userGameDeleteSchema, userGamePostSchema } from "@/lib/validations/user-game"
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-
   try {
     const session = await getServerSession(req, res, authOptions)
     const user = session?.user
@@ -30,7 +29,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
               id: `${user.id}-${payload.game.id}`,
             },
             update: {
-              review: payload.review,
+              ...(payload.review && { review: payload.review }),
               ...(payload.status && { status: payload.status }),
               ...(payload.rating && { rating: payload.rating }),
               game: {

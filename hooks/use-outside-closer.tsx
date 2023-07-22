@@ -1,16 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect } from "react"
 
-export default function useOutsideCloser(ref: React.RefObject<HTMLDivElement>, callback: () => void) {
+export default function useOutsideCloser(
+  ref: React.RefObject<HTMLDivElement>,
+  callback: () => void
+) {
   useEffect(() => {
-    function handleClickOutside(event: { target: any; }) {
+    function handleClickOutside(event: { target: any }) {
       if (ref.current && !ref.current.contains(event.target)) {
-        callback();
+        callback()
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref]);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [ref])
 }

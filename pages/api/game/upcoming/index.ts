@@ -7,27 +7,27 @@ import { GamesResultSchema } from '@/lib/validations/games';
 
 
 async function handler(req: NextApiRequest,
-    res: NextApiResponse) {
+  res: NextApiResponse) {
 
-    try {
-        if (req.method === "GET") {
-            const data = await fetch(`${process.env.API_URL}/game/upcoming`, {
-                headers: {
-                    'X-RapidAPI-Key': process.env.API_KEY as string,
-                    'X-RapidAPI-Host': process.env.API_HOST as string,
-                }
-            }).then(res => res.json())        
-
-            const games = GamesResultSchema.parse(data)
-
-            res.send(games)
+  try {
+    if (req.method === "GET") {
+      const data = await fetch(`${process.env.API_URL}/game/upcoming`, {
+        headers: {
+          'X-RapidAPI-Key': process.env.API_KEY as string,
+          'X-RapidAPI-Host': process.env.API_HOST as string,
         }
-    } catch (error) {
-        if (error instanceof z.ZodError) {
-            return res.status(422).json(error.issues)
-        }
-        return res.status(422).end()
+      }).then(res => res.json())
+
+      const games = GamesResultSchema.parse(data)
+
+      res.send(games)
     }
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(422).json(error.issues)
+    }
+    return res.status(422).end()
+  }
 }
 
 export default withMethods(["GET"], withAuthentication(handler))

@@ -1,21 +1,28 @@
-import React from 'react';
-import useOutsideCloser from '@/hooks/use-outside-closer';
-import { Icons } from '@/components/icons';
-import { cn } from '@/lib/utils';
+import React from "react"
+
+import useOutsideCloser from "@/hooks/use-outside-closer"
+import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
 
 interface ModalProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
-  customColor?: [number, number, number];
+  children: React.ReactNode
+  isOpen: boolean
+  onClose: () => void
+  customColor?: [number, number, number]
 }
 
-export const Modal = ({ children, isOpen, onClose, customColor, className }: ModalProps) => {
-  const ref = React.useRef<HTMLDivElement>(null);
+export const Modal = ({
+  children,
+  isOpen,
+  onClose,
+  customColor,
+  className,
+}: ModalProps) => {
+  const ref = React.useRef<HTMLDivElement>(null)
 
   useOutsideCloser(ref, () => {
-    onClose();
-  });
+    onClose()
+  })
 
   return (
     <>
@@ -33,21 +40,24 @@ export const Modal = ({ children, isOpen, onClose, customColor, className }: Mod
                   backgroundColor: `rgba(${customColor}, 0.4)`,
                 }),
               }}
-              className={cn('flex h-full max-h-[85vh] w-full overflow-y-auto overscroll-contain rounded-md p-8', className)}
+              className={cn(
+                "flex h-full max-h-[85vh] w-full overflow-y-auto overscroll-contain rounded-md p-8",
+                className
+              )}
             >
               {children}
             </div>
             <div>
               <button
-                className='group/button absolute right-0 top-0 m-2 flex h-8 w-8 items-center justify-center'
+                className="group/button absolute right-0 top-0 m-2 flex h-8 w-8 items-center justify-center"
                 onClick={() => onClose()}
               >
-                <Icons.close className='w-5 transition-transform group-hover/button:scale-125' />
+                <Icons.close className="w-5 transition-transform group-hover/button:scale-125" />
               </button>
             </div>
           </div>
         </div>
       )}
     </>
-  );
-};
+  )
+}

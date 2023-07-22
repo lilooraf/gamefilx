@@ -1,5 +1,6 @@
-import { UserLibrary } from '@/components/game/library';
-import { Metadata } from 'next';
+import { Metadata } from "next"
+
+import { UserLibrary } from "@/components/game/library"
 
 export const dynamic = "force-dynamic"
 
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function GamesPage() {
   return (
-    <div className='px-4'>
+    <div className="px-4">
       <UserLibrary />
     </div>
-  );
+  )
 }

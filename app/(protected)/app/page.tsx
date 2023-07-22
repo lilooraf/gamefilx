@@ -1,51 +1,52 @@
-'use client';
-import { useState } from 'react';
-import { GamesSection } from '@/components/game/section';
-import { Button } from '@/components/ui/button';
-import { useUser } from '@/hooks/use-user';
-import { PlatformType } from '@/types';
-import { Modal } from '@/components/modal';
-import { UserPlatformsForm } from '@/components/user-platforms-form';
-import { observer } from '@legendapp/state/react';
+"use client"
+import { useState } from "react"
+
+import { GamesSection } from "@/components/game/section"
+import { Button } from "@/components/ui/button"
+import { useUser } from "@/hooks/use-user"
+import { PlatformType } from "@/types"
+import { Modal } from "@/components/modal"
+import { UserPlatformsForm } from "@/components/user-platforms-form"
+import { observer } from "@legendapp/state/react"
 
 const GamesPage = observer(() => {
-  const user = useUser();
-  const [showModal, setShowModal] = useState(false);
+  const user = useUser()
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <div>
       <GamesSection
         gameList={{
-          title: 'Popular',
-          RequestType: 'popular',
+          title: "Popular",
+          RequestType: "popular",
         }}
         id={1}
       />
       <GamesSection
         gameList={{
-          title: 'Hall of Fame',
-          RequestType: 'hall-of-fame',
+          title: "Hall of Fame",
+          RequestType: "hall-of-fame",
         }}
         id={2}
       />
       <GamesSection
         gameList={{
-          title: 'Upcoming',
-          RequestType: 'upcoming',
+          title: "Upcoming",
+          RequestType: "upcoming",
         }}
         id={3}
       />
       {user.platforms.get()?.length ? (
-        <div className='mx-4 border-b-2 border-slate-200/20 p-2 pl-8'>
-          <p className='text-2xl font-bold'>For your platforms 👾</p>
+        <div className="mx-4 border-b-2 border-slate-200/20 p-2 pl-8">
+          <p className="text-2xl font-bold">For your platforms 👾</p>
         </div>
       ) : (
-        <div className='flex items-center justify-center pb-2'>
+        <div className="flex items-center justify-center pb-2">
           <Button
-            variant='ghost'
-            className=' font-bold'
+            variant="ghost"
+            className=" font-bold"
             onClick={() => {
-              setShowModal(true);
+              setShowModal(true)
             }}
           >
             Add your platforms
@@ -57,7 +58,7 @@ const GamesPage = observer(() => {
           key={platform.name}
           gameList={{
             title: platform.longName,
-            RequestType: 'platforms',
+            RequestType: "platforms",
             platforms: [platform.name as PlatformType],
           }}
           id={index + 4}
@@ -66,17 +67,17 @@ const GamesPage = observer(() => {
       <Modal
         isOpen={showModal}
         onClose={() => {
-          setShowModal(false);
+          setShowModal(false)
         }}
-        className='bg-slate-200 dark:bg-slate-800'
+        className="bg-slate-200 dark:bg-slate-800"
       >
-        <div className='flex flex-col items-center justify-center gap-8'>
-          <p className='text-xl font-bold'>Select your platforms</p>
+        <div className="flex flex-col items-center justify-center gap-8">
+          <p className="text-xl font-bold">Select your platforms</p>
           <UserPlatformsForm />
         </div>
       </Modal>
     </div>
-  );
-});
+  )
+})
 
-export default GamesPage;
+export default GamesPage
