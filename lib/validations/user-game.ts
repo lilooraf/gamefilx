@@ -1,5 +1,5 @@
-import { Status } from "@prisma/client"
 import * as z from "zod"
+import { Status } from "@prisma/client"
 
 export const userGamePostSchema = z.object({
   rating: z.number().optional(),
@@ -28,16 +28,16 @@ export const userGameDeleteSchema = z.object({
 
 export const userGameResultSchema = z.array(z.object({
   id: z.number(),
-    name: z.string(),
-    topCriticScore: z.number().nullable(),
-    images: z.object({
-      box: z.object({
-        og: z.string().optional(),
-        sm: z.string().optional(),
-      }).optional(),
-      banner: z.object({
-        og: z.string().optional(),
-        sm: z.string().optional(),
-      }).optional(),
-    })
+  name: z.string(),
+  topCriticScore: z.number().nullable(),
+  images: z.object({
+    box: z.object({
+      og: z.string().optional(),
+      sm: z.string().optional(),
+    }).optional(),
+    banner: z.object({
+      og: z.string().optional(),
+      sm: z.string().optional(),
+    }).optional(),
+  })
 }))

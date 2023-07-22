@@ -1,9 +1,10 @@
 import * as z from "zod"
+
 import { GamesResultSchema } from "@/lib/validations/games"
 import { GameResultSchema } from "@/lib/validations/game"
 import { PlatformsResultSchema } from "@/lib/validations/platforms"
-import { userGamePostSchema, userGameDeleteSchema, userGameResultSchema } from "@/lib/validations/user-game"
 import { userPlatformSchema } from "@/lib/validations/user-platform"
+import { userGamePostSchema, userGameDeleteSchema, userGameResultSchema } from "@/lib/validations/user-game"
 
 
 export type GameDetail = z.infer<typeof GameResultSchema>
@@ -25,21 +26,21 @@ export type UserPlatformRequest = z.infer<typeof userPlatformSchema>
 export type ImageType = 'box' | 'square' | 'masthead' | 'banner' | 'logo' | 'screenshots'
 
 export type NavItem = {
-    title: string
-    target: string
+  title: string
+  target: string
 }
 
 export type GameListType = {
-    RequestType: 'hall-of-fame' | 'popular' | 'upcoming' | 'platforms'
-    title: string
+  RequestType: 'hall-of-fame' | 'popular' | 'upcoming' | 'platforms'
+  title: string
 } & (
-        | {
-            RequestType: 'hall-of-fame' | 'popular' | 'upcoming'
-        }
-        | {
-            RequestType: 'platforms'
-            platforms: PlatformType[]
-        }
-    );
+    | {
+      RequestType: 'hall-of-fame' | 'popular' | 'upcoming'
+    }
+    | {
+      RequestType: 'platforms'
+      platforms: PlatformType[]
+    }
+  );
 
 export type PlatformType = 'all' | 'ps4' | 'xb1' | 'pc' | 'wii-u' | 'vita' | 'switch' | 'oculus' | 'vive' | 'psvr' | '3ds' | 'xbsx' | 'ps5' | 'stadia'

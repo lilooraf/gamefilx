@@ -8,7 +8,7 @@ import axios from "axios"
 jest.mock("axios")
 
 describe("GameDetails", () => {
-  it('renders error state', async () => {
+  it("renders error state", async () => {
     const game = {
       id: 52,
       name: "Test Game",
@@ -21,23 +21,25 @@ describe("GameDetails", () => {
     }
     axios.get = jest.fn().mockResolvedValue({ data: game })
 
-    await act(async () => render(
-      <UserProvider
-        initialUser={{
-          id: 'fae',
-          name: 'fee',
-          email: 'email@email.com',
-          image: 'linktoimage',
-          platforms: [],
-          games: [],
-        }}
-      >
-        <GameDetails game={game} />
-      </UserProvider>
-    ))
+    await act(async () =>
+      render(
+        <UserProvider
+          initialUser={{
+            id: "fae",
+            name: "fee",
+            email: "email@email.com",
+            image: "linktoimage",
+            platforms: [],
+            games: [],
+          }}
+        >
+          <GameDetails game={game} />
+        </UserProvider>
+      )
+    )
 
     expect(screen.getByText("Something went wrong")).toBeInTheDocument()
-  });
+  })
 
   it("renders game details", async () => {
     const game: GameDetail = {
@@ -53,20 +55,22 @@ describe("GameDetails", () => {
     }
     axios.get = jest.fn().mockResolvedValue({ data: game })
 
-    await act(async () => render(
-      <UserProvider
-        initialUser={{
-          id: 'fae',
-          name: 'fee',
-          email: 'email@email.com',
-          image: 'linktoimage',
-          platforms: [],
-          games: [],
-        }}
-      >
-        <GameDetails game={game} />
-      </UserProvider>
-    ))
+    await act(async () =>
+      render(
+        <UserProvider
+          initialUser={{
+            id: "fae",
+            name: "fee",
+            email: "email@email.com",
+            image: "linktoimage",
+            platforms: [],
+            games: [],
+          }}
+        >
+          <GameDetails game={game} />
+        </UserProvider>
+      )
+    )
 
     expect(screen.getByText("Test Game")).toBeInTheDocument()
     expect(screen.getByText("Test description")).toBeInTheDocument()

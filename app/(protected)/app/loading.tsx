@@ -1,4 +1,4 @@
-import { GamesSectionSekeleton } from '@/components/game/section';
+import { GamesSectionSekeleton } from "@/components/game/section"
 
 export default function GamesLoadingPage() {
   return (
@@ -7,5 +7,5 @@ export default function GamesLoadingPage() {
         <GamesSectionSekeleton key={id} id={id} />
       ))}
     </div>
-  );
+  )
 }
