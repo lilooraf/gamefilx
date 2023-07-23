@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
-import { ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
@@ -83,19 +83,6 @@ export default function Login() {
           Google
         </button>
       </div>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={false}
-        limit={1}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </div>
   )
 }

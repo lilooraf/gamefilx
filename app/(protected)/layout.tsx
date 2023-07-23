@@ -5,6 +5,7 @@ import { getCurrentUser } from "@/lib/session"
 import { db } from "@/lib/db"
 import { UserProvider } from "@/hooks/use-user"
 import { GameInfo } from "@/types"
+import { ToastContainer } from "react-toastify"
 
 export const metadata: Metadata = {
   title: "GameFlix",
@@ -108,6 +109,17 @@ export default async function RootLayout({
       >
         {children}
       </UserProvider>
+      <ToastContainer
+        position="bottom-right"
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   )
 }
