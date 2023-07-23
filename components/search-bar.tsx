@@ -24,11 +24,11 @@ export const SearchBar = () => {
   const [isModalOpened, setIsModalOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [input, setInput] = useState("")
+  const [games, setGames] = useState<GameSearch>([])
   const [selectedGame, setSelectedGame] = useState<GameSearch[0] | undefined>(
     undefined
   )
-
-  const [games, setGames] = useState<GameSearch>([])
+  let debouncedInput = useDebounce(input, 1000)
 
   const getGames = async (name: string) => {
     setIsLoading(true)
@@ -42,8 +42,6 @@ export const SearchBar = () => {
         setIsLoading(false)
       })
   }
-
-  const debouncedInput = useDebounce(input, 1000)
 
   useEffect(() => {
     if (debouncedInput) {
