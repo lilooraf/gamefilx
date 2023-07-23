@@ -13,7 +13,7 @@ export const UserLibrary = observer(() => {
       <div className="w-32">
         <select
           id="countries"
-          className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-slate-200 p-2 text-sm text-gray-900 dark:border-gray-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-400"
+          className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-slate-200 p-2 text-sm text-gray-900 ring-indigo-500 focus:outline-none focus:ring-2 dark:border-gray-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-400"
           value={user.library_filter.get()}
           onChange={(e) => {
             user.library_filter.set(e.target.value as Status)
