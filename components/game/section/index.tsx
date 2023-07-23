@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { toast } from "react-toastify"
 
 import { GameListType, Games } from "@/types"
 import { GameListSkeleton, GameList } from "@/components/game/list"
@@ -42,31 +43,27 @@ export function GamesSection({ gameList, id }: GamesProps) {
       .catch(() => {
         setError(true)
         setLoading(false)
+        toast.error("Something went wrong")
       })
   }, [gameList])
 
   if (isLoading) {
     return (
       <div className="flex flex-col p-2">
-        <h4 className="pl-6  text-lg font-bold">{gameList.title}</h4>
+        <h4 className="pl-6 text-lg font-bold">{gameList.title}</h4>
         <GameListSkeleton delay={id} />
       </div>
     )
   }
 
   if (isError) {
-    return (
-      <div className="flex flex-col p-2">
-        <h4 className="pl-6 text-lg font-bold">{gameList.title}</h4>
-        <p className="text-md p-2 pl-6 font-medium">Something went wrong</p>
-      </div>
-    )
+    return
   }
 
   if (games) {
     return (
       <div className="flex flex-col p-2">
-        <h4 className="pl-6  text-lg font-bold">{gameList.title}</h4>
+        <h4 className="pl-6 text-lg font-bold">{gameList.title}</h4>
         <div className="relative">
           <GameList games={games} id={id} />
         </div>
