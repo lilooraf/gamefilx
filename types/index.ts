@@ -5,6 +5,7 @@ import { GameResultSchema } from "@/lib/validations/game"
 import { PlatformsResultSchema } from "@/lib/validations/platforms"
 import { userPlatformSchema } from "@/lib/validations/user-platform"
 import { userGamePostSchema, userGameDeleteSchema, userGameResultSchema } from "@/lib/validations/user-game"
+import { GameSearchSchema } from "@/lib/validations/game-search"
 
 
 export type GameDetail = z.infer<typeof GameResultSchema>
@@ -20,6 +21,8 @@ export type UserGamePostRequest = z.infer<typeof userGamePostSchema>
 export type UserGameDeleteRequest = z.infer<typeof userGameDeleteSchema>
 
 export type UserGame = z.infer<typeof userGameResultSchema>
+
+export type GameSearch = z.infer<typeof GameSearchSchema>
 
 export type UserPlatformRequest = z.infer<typeof userPlatformSchema>
 
