@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { NavItem } from "@/types"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { SearchBarButton } from "@/components/search-bar"
 
 interface NavLinksProps {
   items: NavItem[]
@@ -31,6 +32,9 @@ export function NavLinks({ items, onClickLink }: NavLinksProps) {
           </Link>
         </li>
       ))}
+      <li>
+        <SearchBarButton />
+      </li>
     </ul>
   )
 }
