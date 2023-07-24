@@ -6,6 +6,7 @@ import { UserAccountNav } from "@/components/user-account-nav"
 import { NavLinks } from "@/components/nav-links"
 import { Icons } from "@/components/icons"
 import MobileNav from "@/components/mobile-nav"
+import { ThemeToggle } from "./theme-toggle"
 
 interface NavProps {
   items: NavItem[]
@@ -23,7 +24,10 @@ export default async function NavBar({ items }: NavProps) {
           </Link>
           <NavLinks items={items} />
         </div>
-        <UserAccountNav user={user} />
+        <div className="flex items-center justify-center gap-2 align-middle">
+          <ThemeToggle />
+          <UserAccountNav user={user} />
+        </div>
       </nav>
       <MobileNav items={items} user={user} />
     </>

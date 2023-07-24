@@ -3,6 +3,7 @@ import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function LandingPage() {
   return (
@@ -11,15 +12,18 @@ export default function LandingPage() {
       className="scrollbar-hidden relative h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth"
     >
       <div className="sticky top-0 z-10 flex justify-end">
-        <Link
-          href="/login"
-          className={cn(
-            buttonVariants({ variant: "outline" }),
-            "blurry-background absolute m-2"
-          )}
-        >
-          Login
-        </Link>
+        <div className="absolute m-2 flex items-center justify-center gap-2 align-middle">
+          <ThemeToggle />
+          <Link
+            href="/login"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "blurry-background m-2"
+            )}
+          >
+            Login
+          </Link>
+        </div>
       </div>
       <section className="h-screen snap-start bg-gradient-to-b from-indigo-500 ">
         <div className="flex h-full flex-col items-center justify-center">
