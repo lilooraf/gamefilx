@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useOutsideCloser from '../hooks/use-outside-closer';
+import useOutsideCloser from '@/hooks/use-outside-closer';
 
 describe('useOutsideCloser', () => {
   it('calls the callback when clicking outside the ref', () => {
