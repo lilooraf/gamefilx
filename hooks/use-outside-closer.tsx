@@ -6,7 +6,7 @@ export default function useOutsideCloser(
 ) {
   useEffect(() => {
     function handleClickOutside(event: { target: any }) {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (ref.current && (!ref.current.contains(event.target) && !(typeof event.target?.parentElement?.className === "string" ? event.target?.parentElement?.className : undefined)?.match("Toast"))) {
         callback()
       }
     }
