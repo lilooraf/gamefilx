@@ -13,11 +13,10 @@ type User = {
   image: Observable<string | null>
   library_filter: Observable<Status>
   platforms: Observable<
-    | {
-        name: string
-        longName: string
-      }[]
-    | undefined
+    {
+      name: string
+      longName: string
+    }[]
   >
   games: Observable<
     {
@@ -30,70 +29,15 @@ type User = {
   >
 }
 
-type Action =
-  | {
-    type: "addPlatform"
-    payload: {
-      name: string
-      longName: string
-    }
-  }
-  | {
-    type: "removePlatform"
-    payload: {
-      name: string
-    }
-  }
-  | {
-    type: "setLibraryFilter"
-    payload: Status
-  }
-  | {
-    type: "addGame"
-    payload: {
-      id: number
-      rating: number | null
-      review: string | null
-      status: Status
-      game: GameInfo
-    }
-  }
-  | {
-    type: "removeGame"
-    payload: {
-      id: number
-    }
-  }
-  | {
-    type: "updateGame"
-    payload: {
-      id: number
-      rating?: number | null
-      review?: string | null
-      status?: Status
-    }
-  }
-
-export const UserContext = createContext<UseUserManagerResult>({
-  user: {
-    id: observable(''),
-    name: observable(null),
-    email: observable(null),
-    image: observable(null),
-    library_filter: observable("WISH_LIST"),
-    platforms: observable(undefined),
-    games: observable([]),
-  },
-  addPlatform: () => { },
-  removePlatform: () => { },
-  setLibraryFilter: () => { },
-  addGame: () => { },
-  removeGame: () => { },
-  updateGame: () => { },
+export const UserContext = createContext<User>({
+  id: observable(""),
+  name: observable(null),
+  email: observable(null),
+  image: observable(null),
+  library_filter: observable("WISH_LIST"),
+  platforms: observable([]),
+  games: observable([]),
 })
-
-
-type UseUserManagerResult = ReturnType<typeof useUserManager>
 
 interface UserProviderProps {
   initialUser: {
@@ -123,7 +67,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({
   children,
 }) => (
   <UserContext.Provider
-    value={useUserManager({
+    value={{
       id: observable(initialUser.id),
       name: observable(initialUser.name),
       email: observable(initialUser.email),
@@ -144,179 +88,108 @@ export const UserProvider: React.FC<UserProviderProps> = ({
           game: game.game,
         }))
       ),
-    })}
+    }}
   >
     {children}
   </UserContext.Provider>
 )
 
-function useUserManager(initialUser: User): {
-  user: User
-  addPlatform: (platform: {
-    name: string
-    longName: string
-  }) => void
-  removePlatform: (platform: {
-    name: string
-  }) => void
-  setLibraryFilter: (filter: Status) => void
-  addGame: (game: {
-    id: number
-    rating: number | null
-    review: string | null
-    status: Status
-    game: GameInfo
-  }) => void
-  removeGame: (game: {
-    id: number
-  }) => void
-  updateGame: (game: {
-    id: number
-    rating?: number | null
-    review?: string | null
-    status?: Status
-  }) => void
-} {
-  const [user, dispatch] = useReducer(
-    userReducer,
-    initialUser
-  )
+export const useUserPlatforms = () => {
+  const { platforms } = useContext(UserContext)
+  return platforms
+}
 
-  const addPlatform = (platform: {
-    name: string
-    longName: string
-  }) => {
-    dispatch({ type: "addPlatform", payload: platform })
+export const useUserId = () => {
+  const { id } = useContext(UserContext)
+  return id
+}
+
+export const useUserName = () => {
+  const { name } = useContext(UserContext)
+  return name
+}
+
+export const useUserEmail = () => {
+  const { email } = useContext(UserContext)
+  return email
+}
+
+export const useUserImage = () => {
+  const { image } = useContext(UserContext)
+  return image
+}
+
+export const useUserLibraryFilter = () => {
+  const { library_filter } = useContext(UserContext)
+  return library_filter
+}
+
+export const useUserGames = () => {
+  const { games } = useContext(UserContext)
+
+  const removeGame = (id: number) => {
+    games.set(games.get()?.filter((game) => game.id !== id))
   }
 
-  const removePlatform = (platform: {
-    name: string
-  }) => {
-    dispatch({ type: "removePlatform", payload: platform })
-  }
-
-  const setLibraryFilter = (filter: Status) => {
-    dispatch({ type: "setLibraryFilter", payload: filter })
-  }
-
-  const addGame = (game: {
+  const addGame = ({
+    id,
+    rating,
+    review,
+    status,
+    game,
+  }: {
     id: number
     rating: number | null
     review: string | null
     status: Status
     game: GameInfo
   }) => {
-    dispatch({ type: "addGame", payload: game })
+    games.set(
+      games.get()?.concat({
+        id: id,
+        rating: rating,
+        review: review,
+        status: status,
+        game: game,
+      })
+    )
   }
 
-  const removeGame = (game: {
-    id: number
-  }) => {
-    dispatch({ type: "removeGame", payload: game })
-  }
-
-  const updateGame = (game: {
+  const updateGame = ({
+    id,
+    rating,
+    review,
+    status,
+  }: {
     id: number
     rating?: number | null
     review?: string | null
     status?: Status
   }) => {
-    dispatch({ type: "updateGame", payload: game })
+    games.set(
+      games.get().map((game) =>
+        game.id === id
+          ? {
+              ...game,
+              ...(rating && {
+                rating: rating,
+              }),
+              ...(review && {
+                review: review,
+              }),
+              ...(status && {
+                status: status,
+              }),
+            }
+          : game
+      )
+    )
   }
 
   return {
-    user,
-    addPlatform,
-    removePlatform,
-    setLibraryFilter,
+    games,
     addGame,
     removeGame,
     updateGame,
   }
-}
-
-const userReducer = (state: User, action: Action): User => {
-  switch (action.type) {
-    case "addPlatform":
-      return {
-        ...state,
-        platforms: observable(state?.platforms.get()?.concat(action.payload)),
-      }
-    case "removePlatform":
-      return {
-        ...state,
-        platforms: observable(state?.platforms.get()?.filter(
-          (platform) => platform.name !== action.payload.name
-        )),
-      }
-    case "setLibraryFilter":
-      return {
-        ...state,
-        library_filter: observable(action.payload),
-      }
-    case "addGame":
-      return {
-        ...state,
-        games: observable(state?.games.concat(action.payload)),
-      }
-    case "removeGame":
-      return {
-        ...state,
-        games: observable(state?.games.get().filter(
-          (game) => game.id !== action.payload.id
-        )),
-      }
-    case "updateGame":
-      return {
-        ...state,
-        games: observable(state?.games.get().map((game) =>
-          game.id === action.payload.id
-            ? {
-              ...game,
-              ...(action.payload.rating && { rating: action.payload.rating }),
-              ...(action.payload.review && { review: action.payload.review }),
-              ...(action.payload.status && { status: action.payload.status }),
-              }
-            : game
-        )),
-      }
-    default:
-      return state
-  }
-}
-
-
-export const useUser = (): UseUserManagerResult["user"] => {
-  const { user } = useContext(UserContext)
-  return user
-}
-
-export const useAddPlatform = (): UseUserManagerResult["addPlatform"] => {
-  const { addPlatform } = useContext(UserContext)
-  return addPlatform
-}
-
-export const useRemovePlatform = (): UseUserManagerResult["removePlatform"] => {
-  const { removePlatform } = useContext(UserContext)
-  return removePlatform
-}
-
-export const useSetLibraryFilter = (): UseUserManagerResult["setLibraryFilter"] => {
-  const { setLibraryFilter } = useContext(UserContext)
-  return setLibraryFilter
-}
-
-export const useAddGame = (): UseUserManagerResult["addGame"] => {
-  const { addGame } = useContext(UserContext)
-  return addGame
-}
-
-export const useRemoveGame = (): UseUserManagerResult["removeGame"] => {
-  const { removeGame } = useContext(UserContext)
-  return removeGame
-}
-
-export const useUpdateGame = (): UseUserManagerResult["updateGame"] => {
-  const { updateGame } = useContext(UserContext)
-  return updateGame
 }
