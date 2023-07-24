@@ -6,6 +6,7 @@ import { db } from "@/lib/db"
 import { UserProvider } from "@/hooks/use-user"
 import { GameInfo } from "@/types"
 import { Toaster } from "@/components/toaster"
+import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "GameFlix",
@@ -77,14 +78,19 @@ const getUserGames = (
     })
 }
 
+const handleError = (error: Error) => {
+  console.error(error)
+  redirect('/')
+}
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const user = await getCurrentUser()
-  const platforms = await getUserPlatforms(user)
-  const games = await getUserGames(user)
+  const user = await getCurrentUser().catch((error) => handleError(error))
+  const platforms = await getUserPlatforms(user).catch((error) => handleError(error))
+  const games = await getUserGames(user).catch((error) => handleError(error))
 
   return (
     <>
