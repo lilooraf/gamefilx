@@ -9,6 +9,7 @@ import { NavLinks } from "@/components/nav-links"
 import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import useOutsideCloser from "@/hooks/use-outside-closer"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 interface NavProps {
   items: NavItem[]
@@ -45,7 +46,12 @@ export default function MobileNav({ items, user }: NavProps) {
             <Icons.app className="h-8 w-8 text-indigo-500" />
           </Link>
 
-          <UserAccountNav user={user} />
+          <div className="relative">
+            <div className="absolute right-12">
+              <ThemeToggle />
+            </div>
+            <UserAccountNav user={user} />
+          </div>
         </nav>
         {isMenuOpen && (
           <div className="absolute top-16 z-50 flex w-full justify-center">

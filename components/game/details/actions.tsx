@@ -3,10 +3,11 @@ import { useState } from "react"
 import axios from "axios"
 import { Status } from "@prisma/client"
 import { observer } from "@legendapp/state/react"
+import { toast } from "react-toastify"
 
 import { GameDetail } from "@/types"
 import { Icons } from "@/components/icons"
-import { useUser } from "@/hooks/use-user"
+import { useUserGames } from "@/hooks/use-user"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { UserGameDeleteRequest, UserGamePostRequest } from "@/types"
 import { cn } from "@/lib/utils"
@@ -16,22 +17,20 @@ interface GameActionsProps {
 }
 
 const GameActions = observer(({ game }: GameActionsProps) => {
-  const user = useUser()
+  const { games, addGame, removeGame, updateGame } = useUserGames()
 
   const [isLibraryActionLoading, setIsLibraryActionLoading] = useState(false)
   const [isRatingActionLoading, setIsRatingActionLoading] = useState(false)
 
-  const isInUserLibrary = user.games.get()?.some((userGame) => {
+  const isInUserLibrary = games.get()?.some((userGame) => {
     return userGame.id === game?.id
   })
 
-  const userGameStatus: Status | undefined = user.games
-    .get()
-    ?.find((userGame) => {
-      return userGame.id === game?.id
-    })?.status
+  const userGameStatus: Status | undefined = games.get()?.find((userGame) => {
+    return userGame.id === game?.id
+  })?.status
 
-  const userGameRating: number | null | undefined = user.games
+  const userGameRating: number | null | undefined = games
     .get()
     ?.find((userGame) => {
       return userGame.id === game?.id
@@ -40,13 +39,13 @@ const GameActions = observer(({ game }: GameActionsProps) => {
   const handleLibraryAction = async (status?: Status) => {
     setIsLibraryActionLoading(true)
     if (isInUserLibrary && !status) {
-      await handdleRemoveFromUserLibrary()
+      await handdleRemoveGame()
     }
     if (isInUserLibrary && status) {
-      await handdleUpdateUserLibrary(status)
+      await handdleUpdateGameStatus(status)
     }
     if (!isInUserLibrary) {
-      await handdleAddToUserLibrary(status)
+      await handdleAddGame(status)
     }
     setIsLibraryActionLoading(false)
   }
@@ -73,106 +72,66 @@ const GameActions = observer(({ game }: GameActionsProps) => {
       rating: rating,
     }
 
-    axios.post("/api/user/game", payload).then(() => {
-      user.games.set(
-        user.games.get()?.map((userGame) => {
-          if (userGame.id === game.id) {
-            return {
-              ...userGame,
-              rating: rating,
-            }
-          }
-          return userGame
-        })
-      )
-      setIsRatingActionLoading(false)
-    })
-  }
-
-  const handdleUpdateUserLibrary = async (status: Status) => {
-    const payload: UserGamePostRequest = {
-      game: {
-        id: game.id,
-        name: game.name,
-        topCriticScore: game.topCriticScore,
-        images: {
-          banner: {
-            og: game.images?.banner?.og,
-            sm: game.images?.banner?.sm,
-          },
-          box: {
-            og: game.images?.box?.og,
-            sm: game.images?.box?.sm,
-          },
-        },
-      },
-      status: status,
-    }
-
-    await axios.post("/api/user/game", payload).then(() => {
-      user.games.set(
-        user.games.get()?.map((userGame) => {
-          if (userGame.id === game.id) {
-            return {
-              ...userGame,
-              status: status,
-            }
-          }
-          return userGame
-        })
-      )
-    })
-  }
-
-  const handdleAddToUserLibrary = async (status: Status = "WISH_LIST") => {
-    const payload: UserGamePostRequest = {
-      game: {
-        id: game.id,
-        name: game.name,
-        topCriticScore: game.topCriticScore,
-        images: {
-          banner: {
-            og: game.images?.banner?.og,
-            sm: game.images?.banner?.sm,
-          },
-          box: {
-            og: game.images?.box?.og,
-            sm: game.images?.box?.sm,
-          },
-        },
-      },
-      status: status,
-    }
-
-    await axios.post("/api/user/game", payload).then(() => {
-      user.games.set([
-        ...user.games.get(),
-        {
+    axios
+      .post("/api/user/game", payload)
+      .then(() => {
+        updateGame({
           id: game.id,
+          rating: rating,
+        })
+        setIsRatingActionLoading(false)
+      })
+      .catch(() => {
+        toast.error("Something went wrong")
+      })
+  }
+
+  const handdleUpdateGameStatus = async (status: Status) => {
+    const payload: UserGamePostRequest = {
+      game: game as UserGamePostRequest["game"],
+      status: status,
+    }
+
+    await axios
+      .post("/api/user/game", payload)
+      .then(() => {
+        updateGame({
+          id: game.id,
+          status: status,
+        })
+      })
+      .catch(() => {
+        toast.error("Something went wrong")
+      })
+  }
+
+  const handdleAddGame = async (status: Status = "WISH_LIST") => {
+    const payload: UserGamePostRequest = {
+      game: game as UserGamePostRequest["game"],
+      status: status,
+    }
+
+    await axios
+      .post("/api/user/game", payload)
+      .then(() => {
+        addGame({
+          id: game.id,
+          status: status,
           rating: null,
           review: null,
-          status: status,
-          game: {
-            id: game.id,
-            name: game.name,
-            topCriticScore: game.topCriticScore,
-            images: {
-              banner: {
-                og: game.images?.banner?.og,
-                sm: game.images?.banner?.sm,
-              },
-              box: {
-                og: game.images?.box?.og,
-                sm: game.images?.box?.sm,
-              },
-            },
-          },
-        },
-      ])
-    })
+          game: payload.game,
+        })
+        toast.success("Game added to library", {
+          autoClose: 2000,
+          hideProgressBar: true,
+        })
+      })
+      .catch(() => {
+        toast.error("Something went wrong")
+      })
   }
 
-  const handdleRemoveFromUserLibrary = async () => {
+  const handdleRemoveGame = async () => {
     const payload: UserGameDeleteRequest = {
       gameId: game.id,
     }
@@ -182,11 +141,24 @@ const GameActions = observer(({ game }: GameActionsProps) => {
         data: payload,
       })
       .then(() => {
-        user.games.set(
-          user.games.get()?.filter((userGame) => {
-            return userGame.id !== game?.id
-          })
+        removeGame(game.id)
+        toast.success(
+          <div className="Toast flex items-center justify-between whitespace-nowrap text-center align-middle">
+            <p>Game removed form library</p>
+            <Button
+              variant={"default"}
+              className="Toast bg-green-500 p-1 hover:bg-green-300 dark:bg-green-500 dark:hover:bg-green-700"
+              onClick={() => {
+                handdleAddGame(userGameStatus)
+              }}
+            >
+              <Icons.undo />
+            </Button>
+          </div>
         )
+      })
+      .catch(() => {
+        toast.error("Something went wrong")
       })
   }
 
@@ -267,7 +239,7 @@ const GameActions = observer(({ game }: GameActionsProps) => {
           )}
         >
           <div className="absolute bottom-0 hidden pb-12 group-hover/rating:flex md:mr-3">
-            <div className="flex flex-row-reverse rounded-md bg-slate-200 p-1 drop-shadow-md dark:bg-slate-800">
+            <div className="flex cursor-pointer flex-row-reverse rounded-md bg-slate-200 p-1 drop-shadow-md dark:bg-slate-800">
               <Icons.star
                 className="star-5 p-0"
                 onClick={() => {

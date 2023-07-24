@@ -13,7 +13,7 @@
 }
 
 body {
-    @apply font-sans text-slate-900 antialiased dark:text-white scroll-smooth;
+    @apply font-sans text-slate-900 antialiased dark:text-white scroll-smooth transition-colors duration-300;
 }
 
 

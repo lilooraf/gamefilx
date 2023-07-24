@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 import axios from "axios"
+import { toast } from "react-toastify"
 
 import { GameSearch } from "@/types"
 import { Icons } from "@/components/icons"
@@ -40,6 +41,7 @@ export const SearchBar = () => {
       })
       .catch(() => {
         setIsLoading(false)
+        toast.error("Something went wrong")
       })
   }
 

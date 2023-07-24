@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import { GamesSection } from "@/components/game/section"
 import { Button } from "@/components/ui/button"
-import { useUser } from "@/hooks/use-user"
+import { useUserPlatforms } from "@/hooks/use-user"
 import { PlatformType } from "@/types"
 import { Modal } from "@/components/modal"
 import { UserPlatformsForm } from "@/components/user-platforms-form"
@@ -11,15 +11,15 @@ import { observer } from "@legendapp/state/react"
 import { gameLists } from "@/config/game-lists"
 
 export const SectionsUserPlatforms = observer(() => {
-  const user = useUser()
+  const platforms = useUserPlatforms()
   const [showModal, setShowModal] = useState(false)
 
   const idPlus = gameLists.length
 
   return (
     <>
-      {user.platforms.get()?.length ? (
-        user.platforms.get()?.map((platform, index) => (
+      {platforms.get()?.length ? (
+        platforms.get()?.map((platform, index) => (
           <GamesSection
             key={platform.name}
             gameList={{

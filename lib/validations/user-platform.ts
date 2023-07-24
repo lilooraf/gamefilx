@@ -8,7 +8,7 @@ export const userPlatformSchema = z.object({
         "ps5",
         "ps4",
         "vita",
-        "xbsx",
+        "xbxs",
         "xb1",
         "wii-u",
         "switch",

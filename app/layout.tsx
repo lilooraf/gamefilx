@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import "react-toastify/dist/ReactToastify.css"
-
 import "./globals.css"
+
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="dark:bg-black">{children}</body>
+      <body className="bg-white dark:bg-black">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

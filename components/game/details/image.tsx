@@ -23,7 +23,7 @@ export const GameImageBanner = ({
     return (
       <>
         <Image
-          className="h-full w-full self-center rounded-sm bg-gray-200/20 object-cover"
+          className="aspect-video h-full w-full self-center rounded-sm bg-gray-200/20 object-cover"
           src={
             "https://img.opencritic.com/" +
             (game?.images.masthead?.og || game?.images.banner?.og)
@@ -40,7 +40,7 @@ export const GameImageBanner = ({
   } else if (topCriticScore && topCriticScore > 0) {
     return (
       <>
-        <div className="h-full w-full rounded-sm bg-gray-200/20"></div>
+        <div className="aspect-video h-full w-full rounded-sm bg-gray-200/20"></div>
         <GameScore topCriticScore={topCriticScore} />
       </>
     )

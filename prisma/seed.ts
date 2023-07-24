@@ -23,8 +23,8 @@ async function main() {
       longName: 'PlayStation Vita',
     },
     {
-      name: 'xbsx',
-      longName: 'Xbox Series X',
+      name: 'xbxs',
+      longName: 'Xbox Series X/S',
     },
     {
       name: 'xb1',
