@@ -12,11 +12,11 @@ export const GameDataSkeleton = () => {
         <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
         <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
         <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
-        <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
-        <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
-        <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
-        <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
-        <div className="h-4 w-full rounded-md bg-gray-200/20"></div>
+        <div className="hidden h-4 w-full rounded-md bg-gray-200/20 lg:block"></div>
+        <div className="hidden h-4 w-full rounded-md bg-gray-200/20 lg:block"></div>
+        <div className="hidden h-4 w-full rounded-md bg-gray-200/20 lg:block"></div>
+        <div className="hidden h-4 w-full rounded-md bg-gray-200/20 lg:block"></div>
+        <div className="hidden h-4 w-full rounded-md bg-gray-200/20 lg:block"></div>
       </div>
     </div>
   )
