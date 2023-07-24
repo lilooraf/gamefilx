@@ -49,7 +49,7 @@ export function GamesSection({ gameList, id }: GamesProps) {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col p-2">
+      <div className="flex flex-col py-2">
         <h4 className="pl-6 text-lg font-bold">{gameList.title}</h4>
         <GameListSkeleton delay={id} />
       </div>
@@ -62,7 +62,7 @@ export function GamesSection({ gameList, id }: GamesProps) {
 
   if (games) {
     return (
-      <div className="flex flex-col p-2">
+      <div className="flex flex-col py-2">
         <h4 className="pl-6 text-lg font-bold">{gameList.title}</h4>
         <div className="relative">
           <GameList games={games} id={id} />
