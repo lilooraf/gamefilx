@@ -12,7 +12,7 @@ const GameTrailers = ({ game }: GameTrailersProps) => {
         <summary className="flex cursor-pointer items-center justify-center text-center align-middle">
           <Icons.chevronDown className="h-8 transition-transform duration-200 group-open:rotate-180" />
         </summary>
-        <div className="group flex space-x-2 overflow-y-auto overflow-x-scroll scroll-smooth pb-2">
+        <div className="group flex snap-x snap-mandatory space-x-2 overflow-y-auto overflow-x-scroll scroll-smooth pb-2">
           {game?.trailers.map((trailer) => (
             <div key={trailer.videoId} className="flex flex-col space-y-2">
               <p className="line-clamp-2 text-sm font-bold">
@@ -21,7 +21,8 @@ const GameTrailers = ({ game }: GameTrailersProps) => {
               <div className="flex flex-col space-y-2">
                 <div className="relative">
                   <iframe
-                    className="aspect-video w-64 self-center rounded-sm md:w-96"
+                    allowFullScreen={true}
+                    className="aspect-video w-64 snap-center self-center rounded-sm md:w-96"
                     src={`https://www.youtube.com/embed/${trailer.videoId}`}
                   />
                 </div>
