@@ -18,6 +18,10 @@ import {
   Video,
   Search,
   BarChart2,
+  Moon,
+  Sun,
+  Laptop,
+  Undo2,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -41,6 +45,10 @@ export const Icons = {
   video: Video,
   search: Search,
   barChart: BarChart2,
+  laptop: Laptop,
+  moon: Moon,
+  sun: Sun,
+  undo: Undo2,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
