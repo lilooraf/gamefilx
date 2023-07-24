@@ -10,7 +10,7 @@ jest.mock("axios")
 describe("GameDetails", () => {
   it("renders error state", async () => {
     const game = {
-      id: 52,
+      id: 52, // wrong type
       name: "Test Game",
       topCriticScore: 80,
       firstReleaseDate: "date",
@@ -38,7 +38,7 @@ describe("GameDetails", () => {
       )
     )
 
-    expect(screen.getByText("Something went wrong")).toBeInTheDocument()
+    expect(screen.getByText("Oops this game is not available now")).toBeInTheDocument()
   })
 
   it("renders game details", async () => {
