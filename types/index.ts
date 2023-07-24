@@ -46,4 +46,4 @@ export type GameListType = {
     }
   );
 
-export type PlatformType = 'all' | 'ps4' | 'xb1' | 'pc' | 'wii-u' | 'vita' | 'switch' | 'oculus' | 'vive' | 'psvr' | '3ds' | 'xbsx' | 'ps5' | 'stadia'
+export type PlatformType = 'all' | 'ps4' | 'xb1' | 'pc' | 'wii-u' | 'vita' | 'switch' | 'oculus' | 'vive' | 'psvr' | '3ds' | 'xbxs' | 'ps5' | 'stadia'
