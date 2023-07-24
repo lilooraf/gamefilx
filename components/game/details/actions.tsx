@@ -88,21 +88,7 @@ const GameActions = observer(({ game }: GameActionsProps) => {
 
   const handdleUpdateGameStatus = async (status: Status) => {
     const payload: UserGamePostRequest = {
-      game: {
-        id: game.id,
-        name: game.name,
-        topCriticScore: game.topCriticScore,
-        images: {
-          banner: {
-            og: game.images?.banner?.og,
-            sm: game.images?.banner?.sm,
-          },
-          box: {
-            og: game.images?.box?.og,
-            sm: game.images?.box?.sm,
-          },
-        },
-      },
+      game: game as UserGamePostRequest["game"],
       status: status,
     }
 
@@ -121,21 +107,7 @@ const GameActions = observer(({ game }: GameActionsProps) => {
 
   const handdleAddGame = async (status: Status = "WISH_LIST") => {
     const payload: UserGamePostRequest = {
-      game: {
-        id: game.id,
-        name: game.name,
-        topCriticScore: game.topCriticScore,
-        images: {
-          banner: {
-            og: game.images?.banner?.og,
-            sm: game.images?.banner?.sm,
-          },
-          box: {
-            og: game.images?.box?.og,
-            sm: game.images?.box?.sm,
-          },
-        },
-      },
+      game: game as UserGamePostRequest["game"],
       status: status,
     }
 
@@ -149,7 +121,10 @@ const GameActions = observer(({ game }: GameActionsProps) => {
           review: null,
           game: payload.game,
         })
-        toast.success("Game added to library")
+        toast.success("Game added to library", {
+          autoClose: 2000,
+          hideProgressBar: true,
+        })
       })
       .catch(() => {
         toast.error("Something went wrong")
@@ -264,7 +239,7 @@ const GameActions = observer(({ game }: GameActionsProps) => {
           )}
         >
           <div className="absolute bottom-0 hidden pb-12 group-hover/rating:flex md:mr-3">
-            <div className="flex flex-row-reverse rounded-md bg-slate-200 p-1 drop-shadow-md dark:bg-slate-800">
+            <div className="flex cursor-pointer flex-row-reverse rounded-md bg-slate-200 p-1 drop-shadow-md dark:bg-slate-800">
               <Icons.star
                 className="star-5 p-0"
                 onClick={() => {
